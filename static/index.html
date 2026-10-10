@@ -1,0 +1,2588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DARPAN — Swami Vivekananda Digital Mentor | The Inner Mirror</title>
+<meta name="description" content="DARPAN — An AI reflection companion inspired by the documented life and teachings of Swami Vivekananda. Arise, awake, and discover the strength within.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light;
+  --saf: #D35400;
+  --saf-bright: #E65100;
+  --dsaf: #9A3412;
+  --gold: #D4AF37;
+  --gold-glow: #F59E0B;
+  --gold-pale: #F3E5AB;
+  --gold-border: rgba(212, 175, 55, 0.32);
+  --ivory: #FDFBF7;
+  --cream: #F8F3EA;
+  --cream-dark: #EFE4D2;
+  --dark: #120A05;
+  --dark-surface: #1E120A;
+  --dark-elevated: #28190E;
+  --text: #241911;
+  --text-light: #FDFBF7;
+  --mut: #7C6A59;
+  --mut-light: #A89582;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --cinzel: 'Cinzel', serif;
+  --sans: 'Manrope', system-ui, sans-serif;
+  --outfit: 'Outfit', system-ui, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --glow-saffron: 0 0 40px rgba(211, 84, 0, 0.35);
+  --glow-gold: 0 0 30px rgba(245, 158, 11, 0.3);
+  --shadow-card: 0 16px 40px -10px rgba(18, 10, 5, 0.08);
+  --shadow-elevated: 0 25px 60px -15px rgba(18, 10, 5, 0.15);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--text);
+  font: 400 16px/1.65 var(--sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; }
+:focus-visible { outline: 2px solid var(--saf); outline-offset: 3px; }
+h1, h2, h3, h4, p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+
+/* ---- TOP ANNOUNCEMENT BANNER (VIVEK MARG STYLE) ---- */
+.top-banner {
+  background: linear-gradient(90deg, #100804 0%, #201309 35%, #461C08 50%, #201309 65%, #100804 100%);
+  color: #F8E7D0;
+  font: 600 12.5px/1 var(--outfit);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px 18px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+  position: relative;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.top-banner span.tag-pulse {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #F59E0B;
+  box-shadow: 0 0 10px #F59E0B;
+  animation: bannerPulse 2s infinite ease-in-out;
+}
+@keyframes bannerPulse { 0%, 100% { opacity: 0.4; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.3); } }
+.top-banner a {
+  color: #FBBF24;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-left: 6px;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+.top-banner a:hover { color: #FFF; }
+
+/* ---- REFINED NAVIGATION BAR ---- */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 55;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px clamp(20px, 4vw, 56px);
+  background: rgba(253, 251, 247, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(199, 154, 73, 0.18);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.brand-seal {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #F59E0B 0%, #D35400 55%, #832704 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-family: var(--cinzel);
+  font-weight: 800;
+  font-size: 20px;
+  box-shadow: 0 4px 16px rgba(211, 84, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+.brand-seal::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px dashed rgba(243, 229, 171, 0.5);
+  border-radius: 50%;
+  animation: sealSpin 40s linear infinite;
+}
+@keyframes sealSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.brand-titles b {
+  font: 700 22px var(--cinzel);
+  letter-spacing: 0.22em;
+  color: var(--dark);
+  display: block;
+  line-height: 1.1;
+}
+.brand-titles small {
+  display: block;
+  font: 600 9.5px var(--outfit);
+  letter-spacing: 0.22em;
+  color: var(--dsaf);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+nav ul {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+nav a {
+  font: 600 13.5px var(--sans);
+  color: var(--text);
+  letter-spacing: 0.02em;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  transition: all 0.25s ease;
+  position: relative;
+}
+nav a:hover {
+  color: var(--dsaf);
+  background: rgba(211, 84, 0, 0.06);
+}
+nav a.legend-pill {
+  background: rgba(211, 84, 0, 0.1);
+  color: var(--dsaf);
+  font-weight: 700;
+  border: 1px solid rgba(211, 84, 0, 0.2);
+}
+nav a.legend-pill:hover {
+  background: rgba(211, 84, 0, 0.16);
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-cta {
+  background: linear-gradient(135deg, var(--saf-bright) 0%, var(--saf) 100%);
+  color: #FFF !important;
+  font: 700 13px var(--outfit);
+  letter-spacing: 0.06em;
+  padding: 9px 20px !important;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 18px rgba(211, 84, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 24px rgba(211, 84, 0, 0.42);
+  color: #FFF !important;
+}
+.dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-border);
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  color: var(--dsaf);
+}
+.dot:hover {
+  background: #FFF;
+  border-color: var(--saf);
+  transform: rotate(90deg);
+}
+
+/* ---- BUTTONS & UTILITIES ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  font: 700 13px/1 var(--outfit);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #FFF;
+  background: linear-gradient(135deg, #E65100 0%, #D35400 55%, #A94F13 100%);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px -4px rgba(211, 84, 0, 0.38), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn:hover {
+  transform: translateY(-2.5px);
+  box-shadow: 0 16px 32px -4px rgba(211, 84, 0, 0.48), 0 0 20px rgba(245, 158, 11, 0.3);
+}
+.btn:active { transform: translateY(0); }
+.btn.ghost {
+  background: transparent;
+  color: var(--dark);
+  border: 1.5px solid rgba(169, 79, 19, 0.35);
+  box-shadow: none;
+}
+.btn.ghost:hover {
+  background: rgba(211, 84, 0, 0.08);
+  border-color: var(--saf);
+  color: var(--dsaf);
+  transform: translateY(-2px);
+}
+.eyebrow {
+  font: 700 11.5px/1.4 var(--outfit);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--saf);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 2px;
+  background: var(--saf);
+  display: inline-block;
+  border-radius: 2px;
+}
+.big-h {
+  font: 600 clamp(36px, 5.2vw, 68px)/1.08 var(--serif);
+  color: var(--dark);
+  letter-spacing: -0.015em;
+}
+.gold-hi {
+  color: #D35400;
+  background: linear-gradient(120deg, rgba(245, 158, 11, 0.18) 0%, rgba(211, 84, 0, 0.12) 100%);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* ==========================================================
+   HERO SECTION (INSPIRED BY VIVEK MARG & SWAMI VIVEKANANDA)
+   ========================================================== */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: 50px clamp(20px, 4.5vw, 72px) 70px;
+  overflow: hidden;
+  background: 
+    radial-gradient(ellipse 70% 60% at 75% 35%, rgba(212, 115, 30, 0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 50% at 20% 60%, rgba(229, 169, 59, 0.12) 0%, transparent 65%),
+    linear-gradient(180deg, #100804 0%, #190E07 55%, #100703 100%);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Mandala & Dust preserved */
+#mandala {
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.08) 0%, rgba(211, 84, 0, 0.04) 40%, transparent 70%);
+  border: 1px dashed rgba(212, 175, 55, 0.25);
+  animation: mandalaRotate 90s linear infinite;
+  z-index: 1;
+}
+#mandala::before {
+  content: '';
+  position: absolute;
+  inset: 50px;
+  border-radius: 50%;
+  border: 1px dotted rgba(211, 84, 0, 0.22);
+  animation: mandalaRotate 60s linear infinite reverse;
+}
+@keyframes mandalaRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.dust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.dust i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #F59E0B 0%, rgba(211, 84, 0, 0) 70%);
+  animation: dustRise linear infinite;
+}
+@keyframes dustRise {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  20% { opacity: 0.7; }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(-380px) scale(1.4); opacity: 0; }
+}
+
+/* Hero Portrait element (Required by JS) */
+.portrait {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  display: none;
+}
+.portrait .ph { width: 100%; height: 100%; }
+.portrait .slot { display: none; }
+
+/* HERO GRID CONTAINER: Spacious 2-Column Layout (Image 3 Inspiration) */
+.hero-stage {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 460px);
+  gap: clamp(40px, 5.5vw, 90px);
+  align-items: center;
+}
+
+/* ---- LEFT COLUMN: HERO CONTENT ---- */
+.hero-copy {
+  position: relative;
+  z-index: 6;
+  max-width: 720px;
+}
+.hero-eyebrow {
+  font: 800 11.5px var(--outfit);
+  letter-spacing: 0.32em;
+  color: #E5A93B;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+.hero-heading {
+  font: 500 clamp(44px, 5.8vw, 78px)/1.05 var(--serif);
+  letter-spacing: -0.015em;
+  color: #FFF8EE;
+  margin-bottom: 24px;
+}
+.hero-heading .strength-italic {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  color: #D77A2C;
+  text-shadow: 0 0 40px rgba(215, 122, 44, 0.4);
+  display: inline-block;
+}
+.hero-lede {
+  font: 400 clamp(19px, 2.1vw, 24px)/1.5 var(--serif);
+  color: #E0CEBE;
+  margin-bottom: 16px;
+  max-width: 32em;
+}
+.hero-subtext {
+  font: 400 14.5px/1.7 var(--sans);
+  color: #9A8470;
+  margin-bottom: 30px;
+  max-width: 33em;
+}
+
+/* CTA Buttons */
+.hero-cta-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 38px;
+}
+.hero-primary-btn {
+  background: #24140C;
+  border: 1.5px solid #482B1B;
+  color: #FFF4E5;
+  padding: 15px 30px;
+  border-radius: 6px;
+  font: 800 12.5px var(--outfit);
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition: all 0.28s ease;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+}
+.hero-primary-btn:hover {
+  background: #D35400;
+  border-color: #F59E0B;
+  color: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(211, 84, 0, 0.35);
+}
+.hero-secondary-link {
+  color: #8C7866;
+  font: 700 12.5px var(--outfit);
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  border-bottom: 1px solid #4D3D2F;
+  padding-bottom: 3px;
+  transition: all 0.25s ease;
+}
+.hero-secondary-link:hover {
+  color: #E5A93B;
+  border-color: #E5A93B;
+}
+
+/* ---- PROFICIENT & COMPACT LIFE CYCLE STEPPER (NOT MASSIVE) ---- */
+.life-cycle-stepper {
+  background: rgba(27, 16, 9, 0.7);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 12px;
+  padding: 18px 22px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  max-width: 680px;
+}
+.stepper-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.stepper-kicker {
+  font: 800 10px var(--outfit);
+  letter-spacing: 0.26em;
+  color: #E5A93B;
+  text-transform: uppercase;
+}
+.stepper-badge {
+  background: rgba(211, 84, 0, 0.2);
+  color: #F59E0B;
+  font: 800 10px var(--outfit);
+  letter-spacing: 0.18em;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(211, 84, 0, 0.35);
+}
+.stepper-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.dial-year-btn {
+  background: rgba(38, 22, 12, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  padding: 8px 4px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+.dial-year-btn .step-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #E5A93B;
+  opacity: 0.6;
+}
+.dial-year-btn b {
+  font: 800 12px var(--outfit);
+  letter-spacing: 0.04em;
+  color: #E6D8C8;
+}
+.dial-year-btn small {
+  font: 600 9px var(--sans);
+  color: #9C8978;
+}
+.dial-year-btn:hover {
+  background: rgba(211, 84, 0, 0.2);
+  border-color: #F59E0B;
+  transform: translateY(-2px);
+}
+.dial-year-btn.active {
+  background: linear-gradient(135deg, #E65100, #B24000);
+  border-color: #F5A623;
+  box-shadow: 0 4px 16px rgba(230, 81, 0, 0.5);
+}
+.dial-year-btn.active b { color: #FFF; }
+.dial-year-btn.active small { color: #FFE2C2; }
+.dial-year-btn.active .step-dot { background: #FFF; opacity: 1; }
+
+.stepper-narrative {
+  background: rgba(18, 10, 5, 0.55);
+  border-left: 2.5px solid #E5A93B;
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+}
+.narrative-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.narrative-era {
+  font: 800 9.5px var(--outfit);
+  letter-spacing: 0.2em;
+  color: #F59E0B;
+}
+.narrative-heading {
+  font: 600 14px var(--serif);
+  color: #FFF;
+}
+.narrative-lede {
+  font: 400 12.5px/1.55 var(--sans);
+  color: #CFC2B4;
+  margin: 0;
+}
+.narrative-quote {
+  font: italic 12px/1.5 var(--serif);
+  color: #A89584;
+  margin: 4px 0 0;
+  display: none;
+}
+
+/* ---- RIGHT COLUMN: MAJESTIC ARCH PORTRAIT (IMAGE 3) ---- */
+.hero-arch-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.arch-portrait-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 4 / 5.4;
+  border-radius: 220px 220px 24px 24px;
+  border: 2px solid rgba(245, 198, 120, 0.55);
+  background: radial-gradient(circle at 50% 30%, #3D2212 0%, #1D0F07 65%, #0F0703 100%);
+  box-shadow: 
+    0 30px 90px rgba(0, 0, 0, 0.75),
+    0 0 60px rgba(229, 138, 54, 0.3),
+    inset 0 0 20px rgba(245, 198, 120, 0.2),
+    inset 0 1px 3px rgba(255, 230, 180, 0.4);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.arch-portrait-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 220px 220px 24px 24px;
+  background: 
+    radial-gradient(ellipse 90% 70% at 50% 20%, rgba(245, 198, 120, 0.12) 0%, transparent 60%),
+    linear-gradient(180deg, transparent 65%, rgba(15, 7, 3, 0.8) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+.arch-halo {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 175, 95, 0.55) 0%, rgba(211, 84, 0, 0.22) 45%, transparent 75%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+.arch-manuscript-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+.arch-main-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  filter: contrast(1.06) saturate(1.08) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+  z-index: 2;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
+}
+.arch-portrait-card:hover .arch-main-photo {
+  transform: scale(1.04);
+  filter: contrast(1.09) saturate(1.12) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7));
+}
+.arch-gold-seal {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  z-index: 10;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #F5C678 0%, #C48E33 65%, #875916 100%);
+  border: 1.5px solid #FFF3D4;
+  box-shadow: 
+    0 10px 28px rgba(0, 0, 0, 0.55),
+    inset 0 2px 4px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #2B180A;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+.arch-portrait-card:hover .arch-gold-seal {
+  transform: scale(1.06) rotate(3deg);
+}
+.seal-deva {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  color: #2B180A;
+}
+.arch-gold-seal small {
+  font: 800 6.5px var(--outfit);
+  letter-spacing: 0.14em;
+  color: #4A2B14;
+  margin-top: 3px;
+  text-transform: uppercase;
+  max-width: 76px;
+}
+
+@media (max-width: 980px) {
+  .hero-stage {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .hero-arch-column {
+    order: -1;
+  }
+  .arch-portrait-card {
+    max-width: 320px;
+  }
+  .stepper-track {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================
+   STAGE / INTRO QUESTIONS (HIGH CONTRAST SPIRITUAL REVEAL)
+   ========================================================== */
+.stage {
+  padding: 110px clamp(24px, 6vw, 96px);
+  position: relative;
+  overflow: hidden;
+}
+.stage.dark {
+  background: 
+    radial-gradient(circle at 80% 20%, rgba(211, 84, 0, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+    linear-gradient(180deg, #180D06 0%, #120904 100%);
+  color: var(--text-light);
+  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+}
+.stage-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.sanskrit-verse {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.4vw, 38px);
+  color: var(--gold-pale);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.verse-sub {
+  font: 500 13px var(--outfit);
+  letter-spacing: 0.24em;
+  color: #D4AF37;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+.q-title {
+  font: 600 clamp(30px, 4vw, 50px)/1.15 var(--serif);
+  color: #FFF;
+  margin-bottom: 44px;
+}
+.q {
+  font: 500 clamp(22px, 2.8vw, 34px)/1.35 var(--serif);
+  color: rgba(255, 248, 238, 0.35);
+  margin-bottom: 22px;
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(18px);
+  filter: blur(3px);
+}
+.q.on {
+  color: #FFF;
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  text-shadow: 0 2px 20px rgba(245, 158, 11, 0.25);
+}
+
+/* ==========================================================
+   INNER UNIVERSE (INTERACTIVE MIND GALAXY)
+   ========================================================== */
+.inner-universe {
+  position: relative;
+  padding: 90px clamp(20px, 4.5vw, 64px) 110px;
+  background: 
+    radial-gradient(circle at 50% 40%, rgba(211, 84, 0, 0.14) 0%, transparent 65%),
+    linear-gradient(180deg, #120904 0%, #1A0F08 50%, #0F0703 100%);
+  color: #F8F3EA;
+  overflow: hidden;
+  min-height: 860px;
+}
+.universe-intro {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 5;
+}
+.universe-intro .big-h { color: #FFF; }
+.universe-copy {
+  max-width: 520px;
+  font: 400 15px/1.65 var(--sans);
+  color: #CDB7A3;
+}
+.universe-stage {
+  position: relative;
+  max-width: 1300px;
+  height: clamp(520px, 68vh, 720px);
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), inset 0 0 100px rgba(211, 84, 0, 0.08);
+  overflow: hidden;
+  background: #0B0502;
+}
+#uni {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#nq {
+  position: absolute;
+  pointer-events: none;
+  z-index: 40;
+  max-width: 320px;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  background: rgba(27, 15, 8, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(211, 84, 0, 0.35);
+  color: #FFF;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: translate(-50%, 0);
+}
+#nq.show { opacity: 1; transform: translate(-50%, -10px); }
+#nq b {
+  display: block;
+  font: 700 12px var(--outfit);
+  letter-spacing: 0.2em;
+  color: #F59E0B;
+  margin-bottom: 6px;
+}
+#nq .qtext {
+  display: block;
+  font: 500 16px/1.4 var(--serif);
+  color: #FFF;
+  margin-bottom: 8px;
+}
+#nq .hint {
+  display: block;
+  font: 500 11px var(--sans);
+  color: #A89582;
+  letter-spacing: 0.04em;
+}
+#wowt {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font: 600 24px var(--serif);
+  color: #F59E0B;
+  background: rgba(18, 10, 5, 0.85);
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--gold);
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 50;
+  text-align: center;
+}
+#wowt.on { opacity: 1; }
+#wowt b { display: block; font-family: var(--cinzel); font-size: 28px; color: #FFF; margin-top: 4px; }
+
+.universe-hud {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font: 700 11px var(--outfit);
+  letter-spacing: 0.18em;
+  color: #F59E0B;
+}
+.hud-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+}
+.hud-note {
+  font: 400 12.5px/1.5 var(--sans);
+  color: #A89582;
+  background: rgba(18, 10, 5, 0.75);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  max-width: 280px;
+}
+.mini-archival {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(24, 13, 7, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  padding: 8px 16px 8px 10px;
+  border-radius: var(--radius-full);
+}
+.mini-archival-frame {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--gold);
+}
+.mini-archival-frame img { width: 100%; height: 100%; object-fit: cover; }
+.mini-archival-label {
+  font: 700 12px var(--outfit);
+  letter-spacing: 0.1em;
+  color: #FFF;
+}
+.wisdom-beacon { display: none; }
+.center-sigil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  text-align: center;
+  opacity: 0.28;
+}
+.center-sigil span {
+  font-family: var(--serif);
+  font-size: 80px;
+  color: #F59E0B;
+  display: block;
+  line-height: 1;
+}
+.center-sigil small {
+  font: 700 10px var(--outfit);
+  letter-spacing: 0.3em;
+  color: #FFF;
+}
+.universe-bottom {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.orbit-legend {
+  display: flex;
+  gap: 20px;
+  font: 600 12px var(--outfit);
+  letter-spacing: 0.1em;
+  color: #CDB7A3;
+  text-transform: uppercase;
+}
+.orbit-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend-problem {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #E65100;
+  box-shadow: 0 0 10px #E65100;
+}
+.legend-strength {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #F59E0B;
+  box-shadow: 0 0 10px #F59E0B;
+}
+.universe-caption {
+  max-width: 1200px;
+  margin: 36px auto 0;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 18px;
+  font: 700 11.5px var(--outfit);
+  letter-spacing: 0.28em;
+  color: #8C7867;
+}
+
+/* ==========================================================
+   REFLECT ENTRY & CHAT LAUNCH (SANCTUARY DESK)
+   ========================================================== */
+.entry {
+  padding: 100px clamp(20px, 5vw, 72px) 80px;
+  background: 
+    radial-gradient(ellipse 70% 50% at 50% 20%, rgba(211, 84, 0, 0.08) 0%, transparent 60%),
+    linear-gradient(180deg, #F8F3EA 0%, #FAF6EE 100%);
+  position: relative;
+}
+.chat-launch {
+  max-width: 860px;
+  margin: 0 auto;
+  background: #FFFDF8;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: var(--shadow-elevated), 0 0 50px rgba(211, 84, 0, 0.06);
+  padding: clamp(28px, 5vw, 56px);
+  position: relative;
+}
+.chat-launch-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  border-bottom: 1px solid rgba(199, 154, 73, 0.18);
+  padding-bottom: 24px;
+}
+.chat-launch-top h2 {
+  font: 600 clamp(28px, 4vw, 44px)/1.15 var(--serif);
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.chat-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #D35400, #9A3412);
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--cinzel);
+  font-weight: 800;
+  font-size: 22px;
+  box-shadow: 0 6px 18px rgba(211, 84, 0, 0.3), border: 2px solid #FFF;
+}
+.mentor-welcome {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: rgba(246, 239, 228, 0.6);
+  padding: 18px 22px;
+  border-radius: var(--radius-md);
+  margin-bottom: 28px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+.mentor-welcome small {
+  font: 800 10px var(--outfit);
+  letter-spacing: 0.2em;
+  color: var(--saf);
+  display: block;
+  margin-bottom: 4px;
+}
+.mentor-welcome p {
+  font: 500 16px/1.5 var(--serif);
+  color: var(--dark);
+}
+.journal-box {
+  margin-bottom: 22px;
+}
+.journal-box textarea {
+  width: 100%;
+  min-height: 140px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(169, 79, 19, 0.25);
+  background: #FFF;
+  padding: 20px;
+  font: 400 17px/1.6 var(--sans);
+  color: var(--text);
+  resize: vertical;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+.journal-box textarea:focus {
+  outline: none;
+  border-color: var(--saf);
+  box-shadow: 0 0 0 4px rgba(211, 84, 0, 0.12);
+}
+.chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.chip {
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  background: rgba(246, 239, 228, 0.8);
+  border: 1px solid rgba(199, 154, 73, 0.25);
+  font: 600 12.5px var(--sans);
+  color: #553E2D;
+  transition: all 0.2s ease;
+}
+.chip:hover {
+  background: #FFF;
+  border-color: var(--saf);
+  color: var(--dsaf);
+  transform: translateY(-1.5px);
+}
+.chip[aria-pressed="true"] {
+  background: var(--saf);
+  color: #FFF;
+  border-color: var(--saf);
+}
+.btn.go {
+  width: 100%;
+  padding: 16px;
+  font-size: 14px;
+}
+
+/* ==========================================================
+   CONVERSATION JOURNEY & LIVE CHAT SHELL
+   ========================================================== */
+#journey {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px) 100px;
+  display: none;
+}
+#journey.open { display: block; }
+.chat-shell {
+  background: #FFFDF8;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: var(--shadow-elevated);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.chat-head {
+  padding: 20px 28px;
+  background: linear-gradient(90deg, #FDFBF7 0%, #F8F3EA 100%);
+  border-bottom: 1px solid rgba(199, 154, 73, 0.22);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 700 18px var(--serif);
+  color: var(--dark);
+}
+.chat-progress {
+  font: 800 11px var(--outfit);
+  letter-spacing: 0.2em;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(211, 84, 0, 0.12);
+  color: var(--dsaf);
+  border: 1px solid rgba(211, 84, 0, 0.25);
+}
+.chat-thread {
+  padding: 32px 28px;
+  min-height: 380px;
+  max-height: 600px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  background: #FFFDF8;
+}
+.chat-row {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+  animation: fadeInMsg 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes fadeInMsg { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.chat-row.user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+.chat-row.bot {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+.chat-label {
+  font: 700 11px var(--outfit);
+  letter-spacing: 0.15em;
+  color: var(--mut);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+.chat-bubble {
+  padding: 16px 22px;
+  border-radius: var(--radius-md);
+  font: 400 16px/1.65 var(--sans);
+  position: relative;
+}
+.chat-row.user .chat-bubble {
+  background: linear-gradient(135deg, #D35400 0%, #A94F13 100%);
+  color: #FFF;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 8px 20px rgba(211, 84, 0, 0.25);
+}
+.chat-row.bot .chat-bubble {
+  background: #F8F3EA;
+  color: var(--dark);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 6px 18px rgba(18, 10, 5, 0.04);
+}
+.listen-question {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font: 700 11.5px var(--outfit);
+  letter-spacing: 0.1em;
+  color: var(--saf);
+  background: rgba(211, 84, 0, 0.08);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(211, 84, 0, 0.2);
+  transition: all 0.2s;
+}
+.listen-question:hover { background: var(--saf); color: #FFF; }
+
+.chat-composer {
+  padding: 24px 28px;
+  background: #FDFBF7;
+  border-top: 1px solid rgba(199, 154, 73, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.voice-controls select {
+  font: 600 12.5px var(--sans);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(169, 79, 19, 0.25);
+  background: #FFF;
+  color: var(--text);
+}
+.voice-button {
+  font: 700 12px var(--outfit);
+  letter-spacing: 0.1em;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  background: rgba(211, 84, 0, 0.1);
+  color: var(--dsaf);
+  border: 1px solid rgba(211, 84, 0, 0.25);
+  transition: all 0.2s;
+}
+.voice-button:hover { background: var(--saf); color: #FFF; }
+.voice-button.recording {
+  background: #DC2626;
+  color: #FFF;
+  border-color: #DC2626;
+  animation: recPulse 1.2s infinite;
+}
+@keyframes recPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+#voice-status {
+  font: 500 12px var(--sans);
+  color: var(--mut);
+}
+.chat-composer textarea {
+  width: 100%;
+  min-height: 80px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(169, 79, 19, 0.25);
+  padding: 14px;
+  font: 400 16px var(--sans);
+  color: var(--text);
+  resize: vertical;
+}
+.chat-composer textarea:focus { outline: none; border-color: var(--saf); }
+
+.session-choice {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.think i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--saf);
+  margin: 0 2px;
+  animation: thinkDot 1.2s infinite ease-in-out;
+}
+.think i:nth-child(2) { animation-delay: 0.2s; }
+.think i:nth-child(3) { animation-delay: 0.4s; }
+@keyframes thinkDot { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1.2); opacity: 1; } }
+
+/* Reflection step cards & Archival Sources */
+.step {
+  background: #FFFDF8;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+  margin-top: 24px;
+}
+.step.within {
+  background: linear-gradient(145deg, #FFFDF8 0%, #FAF2E4 100%);
+  border: 1.5px solid var(--gold);
+}
+.step h2 { font: 600 28px/1.25 var(--serif); color: var(--dark); margin: 12px 0 20px; }
+.opts { display: flex; flex-direction: column; gap: 10px; }
+.opt {
+  text-align: left;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  background: #FFF;
+  border: 1px solid rgba(199, 154, 73, 0.25);
+  font: 500 16px var(--sans);
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.opt:hover { border-color: var(--saf); background: rgba(211, 84, 0, 0.04); }
+.opt.sel { background: var(--saf); color: #FFF; border-color: var(--saf); font-weight: 600; }
+
+.act {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0;
+}
+.act label {
+  display: block;
+  font: 700 11px var(--outfit);
+  letter-spacing: 0.18em;
+  color: var(--dsaf);
+  margin-bottom: 6px;
+}
+.act input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(169, 79, 19, 0.25);
+  font: 500 15px var(--sans);
+}
+.act input:focus { outline: none; border-color: var(--saf); }
+
+.tag {
+  font: 800 10.5px var(--outfit);
+  letter-spacing: 0.2em;
+  color: var(--saf);
+  text-transform: uppercase;
+  display: block;
+}
+.manu {
+  background: #FAF5EB;
+  border-left: 3px solid #D4AF37;
+  padding: 20px 24px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 18px 0;
+}
+.manu .meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  font-size: 13px;
+  margin: 16px 0;
+  padding: 12px 0;
+  border-top: 1px solid rgba(199, 154, 73, 0.2);
+  border-bottom: 1px solid rgba(199, 154, 73, 0.2);
+}
+.manu .meta b { display: block; font: 700 10px var(--outfit); letter-spacing: 0.15em; color: var(--mut); }
+.source-excerpt blockquote {
+  margin: 10px 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--saf);
+  font: italic 15.5px/1.6 var(--serif);
+  color: #382416;
+}
+
+/* Shorts Panel */
+.shorts-panel {
+  background: #180F08;
+  color: #FFF;
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  margin-top: 28px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+.shorts-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+.shorts-head h3 { font: 600 24px var(--serif); color: #FFF; }
+.shorts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.short-card { background: #24170E; border-radius: var(--radius-md); overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px; }
+.short-play { position: relative; aspect-ratio: 9/16; max-height: 240px; border-radius: var(--radius-sm); overflow: hidden; background: #000; margin-bottom: 10px; }
+.short-play img { width: 100%; height: 100%; object-fit: cover; }
+.short-trigger {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  color: #FFF;
+  font-size: 28px;
+  transition: all 0.2s;
+}
+.short-trigger:hover { background: rgba(211, 84, 0, 0.6); }
+
+/* ==========================================================
+   FOUR WORLDS / SELF-DEVELOPMENT PATHWAYS
+   ========================================================== */
+.worlds {
+  padding: 100px clamp(20px, 5vw, 72px);
+  background: 
+    radial-gradient(ellipse 60% 40% at 80% 30%, rgba(211, 84, 0, 0.08) 0%, transparent 60%),
+    linear-gradient(180deg, #F8F3EA 0%, #F5ECDD 100%);
+  border-top: 1px solid rgba(199, 154, 73, 0.2);
+}
+.worlds-head {
+  max-width: 900px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+.worlds-head p { font: 400 17px/1.65 var(--sans); color: var(--mut); margin-top: 16px; }
+.world-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.world-card {
+  border-radius: 12px;
+  border: 1.5px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  cursor: pointer;
+}
+.world-card.morning {
+  background: #172620;
+  border-color: rgba(62, 95, 80, 0.5);
+}
+.world-card.parable {
+  background: #1c2a2e;
+  border-color: rgba(68, 97, 106, 0.5);
+}
+.world-card.grove {
+  background: #172620;
+  border-color: rgba(62, 95, 80, 0.5);
+}
+.world-card.archive {
+  background: #1e150d;
+  border-color: rgba(95, 65, 40, 0.5);
+}
+.world-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(229, 138, 54, 0.22);
+  border-color: rgba(229, 169, 59, 0.75);
+}
+.world-card-media {
+  width: 100%;
+  aspect-ratio: 485 / 225;
+  max-height: 230px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #100804;
+}
+.world-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
+.world-card:hover .world-card-media img {
+  transform: scale(1.04);
+  filter: brightness(1.08);
+}
+.world-card-content {
+  padding: 26px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.world-index {
+  font: 800 11px var(--outfit);
+  letter-spacing: 0.24em;
+  color: #E5A93B;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.world-card-content h3 {
+  font: 500 28px/1.2 var(--serif);
+  color: #FFF8EE;
+  margin-bottom: 12px;
+}
+.world-card-content p {
+  font: 400 15px/1.65 var(--sans);
+  color: #BDB0A0;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+.world-link {
+  font: 800 12.5px var(--outfit);
+  letter-spacing: 0.16em;
+  color: #E5A93B;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: gap 0.22s ease, color 0.22s ease;
+}
+.world-card:hover .world-link,
+.world-link:hover {
+  gap: 12px;
+  color: #FFA726;
+}
+
+@media (max-width: 820px) {
+  .world-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+/* ==========================================================
+   PAUSE BREATHING MODAL (ROPA MEDITATION)
+   ========================================================== */
+#pause {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(18, 10, 5, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: #FFF;
+  text-align: center;
+}
+#pause.open { display: flex; }
+#pause > div {
+  max-width: 500px;
+  width: 100%;
+}
+#pause h2 {
+  font: 600 clamp(28px, 4vw, 42px)/1.2 var(--serif);
+  color: #FFF;
+  margin-bottom: 36px;
+}
+.orb {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FBBF24 0%, #D35400 60%, #832704 100%);
+  box-shadow: 0 0 60px rgba(245, 158, 11, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  transition: transform 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+#pstate {
+  font: 700 26px var(--serif);
+  color: #F59E0B;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================
+   TEACHINGS & COMPLETE WORKS LIBRARY
+   ========================================================== */
+.lib {
+  padding: 100px clamp(20px, 5vw, 72px);
+  background: #FFFDF8;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.cats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 32px 0;
+}
+.cat {
+  padding: 10px 22px;
+  border-radius: var(--radius-full);
+  background: rgba(246, 239, 228, 0.85);
+  border: 1px solid rgba(199, 154, 73, 0.28);
+  font: 600 14px var(--sans);
+  color: var(--dark);
+  transition: all 0.2s;
+}
+.cat:hover { background: #FFF; border-color: var(--saf); transform: translateY(-2px); }
+.cat[aria-pressed="true"] { background: var(--saf); color: #FFF; border-color: var(--saf); font-weight: 700; }
+.panel {
+  background: #FAF6EE;
+  border-radius: var(--radius-md);
+  padding: 32px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: var(--shadow-card);
+  min-height: 160px;
+}
+.shelf {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 32px 0 24px;
+}
+.spine {
+  padding: 14px 18px;
+  background: linear-gradient(180deg, #2D1A0D 0%, #1A0F08 100%);
+  color: #D4AF37;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  font: 700 12.5px var(--cinzel);
+  letter-spacing: 0.15em;
+  box-shadow: 0 4px 12px rgba(18, 10, 5, 0.15);
+  transition: all 0.25s;
+}
+.spine:hover { transform: translateY(-4px); background: #3E2412; color: #FFF; border-color: #F59E0B; }
+.spine[aria-pressed="true"] { background: #D35400; color: #FFF; border-color: #FFF; }
+
+.vol-summary-card {
+  animation: fadeInVol 0.35s ease-out forwards;
+}
+@keyframes fadeInVol {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.vol-header {
+  margin-bottom: 20px;
+  border-bottom: 1px dashed rgba(212, 175, 55, 0.35);
+  padding-bottom: 16px;
+}
+.vol-tag {
+  display: inline-block;
+  font: 700 11px var(--outfit);
+  letter-spacing: 0.14em;
+  color: #D35400;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.vol-title {
+  font: 700 clamp(22px, 2.6vw, 32px)/1.2 var(--cinzel), serif;
+  color: #2D1A0D;
+  margin: 6px 0 10px;
+}
+.vol-badge {
+  display: inline-block;
+  background: rgba(212, 175, 55, 0.14);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  color: #7A4B17;
+  padding: 5px 16px;
+  border-radius: 99px;
+  font: 600 12.5px var(--outfit);
+  letter-spacing: 0.05em;
+}
+.vol-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.vol-para {
+  margin: 0;
+  font-family: var(--garamond), serif;
+  font-size: 19px;
+  line-height: 1.65;
+  color: #2C1D13;
+}
+.vol-overall-box {
+  margin-top: 24px;
+  padding: 22px 26px;
+  background: linear-gradient(135deg, #FFFDF8 0%, #F5EAD4 100%);
+  border-left: 4px solid #D35400;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(211, 84, 0, 0.08);
+}
+.vol-overall-box.gold-glow {
+  border-left-color: #D4AF37;
+  background: linear-gradient(135deg, #FFFDF5 0%, #F3E5C8 100%);
+}
+.box-tag {
+  display: block;
+  font: 700 10.5px var(--outfit);
+  letter-spacing: 0.16em;
+  color: #8C430E;
+  margin-bottom: 6px;
+}
+.vol-overall-text {
+  margin: 0;
+  font-family: var(--garamond), serif;
+  font-size: 19px;
+  font-weight: 600;
+  font-style: italic;
+  color: #2D1A0D;
+  line-height: 1.5;
+}
+
+/* ==========================================================
+   REFLECTIONS LOTUS GARDEN
+   ========================================================== */
+.jr {
+  padding: 100px clamp(20px, 5vw, 72px);
+  background: linear-gradient(180deg, #F8F3EA 0%, #FAF6EE 100%);
+  border-top: 1px solid rgba(199, 154, 73, 0.2);
+}
+.entries {
+  margin-top: 36px;
+  display: grid;
+  gap: 20px;
+}
+.flower-entry {
+  background: #FFFDF8;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.lotus-scene {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flower-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.2s ease-out;
+}
+.flower-copy summary {
+  cursor: pointer;
+  list-style: none;
+}
+.flower-copy summary h3 { font: 600 22px var(--serif); color: var(--dark); margin: 4px 0; }
+.flower-record {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(199, 154, 73, 0.2);
+  display: grid;
+  gap: 14px;
+}
+.record-part b { font: 700 10px var(--outfit); letter-spacing: 0.15em; color: var(--saf); display: block; }
+
+/* ==========================================================
+   ARCHIVAL VOICE SECTION
+   ========================================================== */
+#voice .voice {
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 360px);
+  gap: clamp(30px, 5vw, 60px);
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.voice-image {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  background: #000;
+}
+.voice-image img { width: 100%; height: auto; display: block; filter: sepia(0.2) contrast(1.1); }
+.voice-image span {
+  display: block;
+  padding: 8px 14px;
+  font: 500 11px var(--sans);
+  color: #A89582;
+  background: #180F08;
+  text-align: center;
+}
+.stmt {
+  font: 600 14px var(--outfit);
+  letter-spacing: 0.12em;
+  color: #D4AF37;
+  text-transform: uppercase;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* ==========================================================
+   MOBILE DOCK & FOOTER
+   ========================================================== */
+.mobile-dock {
+  display: none;
+  position: fixed;
+  bottom: 16px;
+  left: 20px;
+  right: 20px;
+  z-index: 50;
+  background: rgba(25, 14, 8, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-full);
+  padding: 8px 16px;
+  justify-content: space-around;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+.mobile-dock a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font: 700 10.5px var(--outfit);
+  color: #D8C7B5;
+}
+.mobile-dock a span { font-size: 16px; color: var(--saf); }
+footer {
+  padding: 44px 20px;
+  text-align: center;
+  font: 600 12.5px var(--outfit);
+  letter-spacing: 0.18em;
+  color: var(--mut);
+  text-transform: uppercase;
+  background: #100804;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+@media (max-width: 960px) {
+  .hero-stage { grid-template-columns: 1fr; }
+  .timeline-dial-wrap { margin: 0 auto; max-width: 360px; }
+  .portrait { opacity: 0.35; right: 0; }
+  nav ul { display: none; }
+  .mobile-dock { display: flex; }
+  #voice .voice { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .hero { padding-top: 30px; }
+  .timeline-dial-wrap { max-width: 300px; }
+  .dial-year-btn { font-size: 10.5px; padding: 4px 9px; }
+  .top-banner { font-size: 10.5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Announcement Ribbon (Vivek Marg style) -->
+<div class="top-banner">
+  <span class="tag-pulse"></span>
+  <span>Vivekananda Institute of Values · Vivek Marg Digital Mentor</span>
+  <a href="#reflect">Ask Swamiji Now →</a>
+</div>
+
+<!-- Refined Vivek Marg Navigation -->
+<nav>
+  <div class="brand">
+    <div class="brand-seal" aria-hidden="true">ॐ</div>
+    <div class="brand-titles">
+      <b>DARPAN</b>
+      <small>SWAMI VIVEKANANDA FOR YOUTH · DARPAN</small>
+    </div>
+  </div>
+  <ul>
+    <li><a href="#top" class="legend-pill">The Legend</a></li>
+    <li><a href="#inner-universe">Mind Universe</a></li>
+    <li><a href="#reflect">Ask Swamiji</a></li>
+    <li><a href="#worlds">Four Pathways</a></li>
+    <li><a href="#teachings">Teachings</a></li>
+    <li><a href="/static/growth-pond.html" target="_blank" rel="noopener">My Reflections ↗</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-cta" onclick="document.querySelector('#reflect').scrollIntoView({behavior:'smooth'})">BEGIN REFLECTION →</button>
+    <button class="dot" aria-label="Settings">⚙</button>
+  </div>
+</nav>
+
+<!-- HERO SECTION: Spacious, Majestic Hero (Image 3 Inspiration) + Proficient Life Cycle Stepper -->
+<header class="hero" id="top">
+  <div id="mandala"></div>
+  <div class="grain"></div>
+  <div class="dust" id="dust" aria-hidden="true"></div>
+
+  <div class="hero-stage">
+    <!-- Left Column: Copy, CTAs, and Proficient Life Cycle Stepper -->
+    <div class="hero-copy">
+      <p class="hero-eyebrow">DARPAN · REFLECTION BEFORE REACTION.</p>
+      
+      <h1 class="hero-heading">
+        Find the<br>
+        <span class="strength-italic">strength</span><br>
+        within.
+      </h1>
+
+      <p class="hero-lede">When the mind feels overwhelmed, pause before deciding what it means about you.</p>
+
+      <p class="hero-subtext">An AI reflection companion inspired by documented teachings of Swami Vivekananda — designed to help you pause, question, and act.</p>
+
+      <div class="hero-cta-group">
+        <button class="hero-primary-btn" id="heroBegin">START A CONVERSATION →</button>
+        <a href="#teachings" class="hero-secondary-link">EXPLORE THE TEACHINGS</a>
+      </div>
+
+      <!-- Proficient & Compact Life Cycle Stepper (Not massive, sleek & intuitive) -->
+      <div class="life-cycle-stepper" aria-label="Life milestones of Swami Vivekananda">
+        <div class="stepper-title-row">
+          <span class="stepper-kicker">LIFE OF A LEGEND · 1863 — 1902</span>
+          <span class="stepper-badge" id="heroChapterBadge">CHAPTER 01 / 06</span>
+        </div>
+
+        <div class="stepper-track">
+          <button class="dial-year-btn year-1863 active" type="button" data-ch="1" data-year="1863" data-loc="CALCUTTA" data-title="Narendranath is born" data-lede="Born with an intense hunger for truth, he boldly asked every seer: 'Have you seen God?'" data-quote="brilliant, fearless boy with a sharp intellect and a deep passion for meditation. Growing up with an intense hunger for truth, he refused to accept any belief without logical proof."><span class="step-dot"></span><b>1863</b><small>Calcutta</small></button>
+          <button class="dial-year-btn year-1881" type="button" data-ch="2" data-year="1881" data-loc="DAKSHINESWAR" data-title="Meeting Sri Ramakrishna" data-lede="The life-altering encounter with his Master who answered: 'Yes, I see Him just as I see you.'" data-quote="When Narendra asked Sri Ramakrishna, 'Sir, have you seen God?', the Master replied without hesitation: 'Yes, I see Him more intensely than I see you.' Narendra's doubts melted into divine realization."><span class="step-dot"></span><b>1881</b><small>Master</small></button>
+          <button class="dial-year-btn year-1884" type="button" data-ch="3" data-year="1884–86" data-loc="CALCUTTA" data-title="Two losses, one vow" data-lede="His father passed away in poverty, followed by Sri Ramakrishna. Amid devastation, he took monastic vows." data-quote="Struck by two devastating losses, Narendra and his brother disciples took formal vows of complete renunciation, choosing the sacred monastic name Swami Vivekananda."><span class="step-dot"></span><b>1884</b><small>The Vows</small></button>
+          <button class="dial-year-btn year-1893" type="button" data-ch="4" data-year="1893" data-loc="CHICAGO" data-title="Sisters & Brothers of America" data-lede="The world-historic address at the Parliament of Religions that awoke the consciousness of East and West." data-quote="Seven thousand people rose in a two-minute standing ovation at his opening words. He proclaimed universal tolerance, fearlessness, and the eternal divinity in every human soul."><span class="step-dot"></span><b>1893</b><small>Chicago</small></button>
+          <button class="dial-year-btn year-1897" type="button" data-ch="5" data-year="1897" data-loc="BELUR MATH" data-title="Service as Worship (Atmano Mokshartham)" data-lede="Founding of the Ramakrishna Mission to serve suffering humanity as the living presence of God." data-quote="He transformed spiritual renunciation into active compassion: 'They alone live, who live for others, the rest are more dead than alive.' Service to humanity is true worship."><span class="step-dot"></span><b>1897</b><small>Mission</small></button>
+          <button class="dial-year-btn year-1902" type="button" data-ch="6" data-year="1902" data-loc="BELUR" data-title="Mahasamadhi & Eternal Legacy" data-lede="'It may be that I shall find it good to get outside my body — but I shall not cease to work.'" data-quote="At age 39, Swamiji fulfilled his earthly mission, leaving behind an immortal message for the youth of the world: 'Arise, awake, and stop not till the goal is reached!'"><span class="step-dot"></span><b>1902</b><small>Legacy</small></button>
+        </div>
+
+        <div class="stepper-narrative" id="heroNarrativeBox">
+          <div class="narrative-meta">
+            <span class="narrative-era" id="heroChapterEra">1863 · CALCUTTA</span>
+            <span class="narrative-heading" id="heroChapterTitle">Narendranath is born</span>
+          </div>
+          <p class="narrative-lede" id="heroChapterLede">Born with an intense hunger for truth, he boldly asked every seer: 'Have you seen God?'</p>
+          <blockquote class="narrative-quote" id="heroChapterQuote">Growing up with an intense hunger for truth, he refused to accept any belief without logical proof.</blockquote>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Majestic Arch Archival Portrait of Swami Vivekananda (Image 3) -->
+    <div class="hero-arch-column">
+      <div class="arch-portrait-card">
+        <div class="arch-halo" aria-hidden="true"></div>
+        <div class="arch-manuscript-bg" aria-hidden="true"></div>
+
+        <!-- Archival portrait element (Required by JS) -->
+        <div class="portrait" id="portrait" data-src="https://upload.wikimedia.org/wikipedia/commons/7/78/Swami_Vivekananda_1893_Chicago_Pose_color.png">
+          <div class="ph"></div>
+          <div class="slot"><span>Archival portrait · Swami Vivekananda, Chicago, 1893</span></div>
+        </div>
+
+        <img class="arch-main-photo" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Swami_Vivekananda_1893_Chicago_Pose_color.png" alt="Swami Vivekananda Chicago 1893 archival portrait" />
+
+        <!-- Circular Gold Sanskrit Medal Seal -->
+        <div class="arch-gold-seal" aria-hidden="true">
+          <span class="seal-deva">दर्पण</span>
+          <small>DISCERN · COURAGE · ACT</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STAGE / INTRO QUESTIONS REVEAL -->
+<section class="dark stage" id="intro">
+  <div class="stage-inner">
+    <div class="sanskrit-verse">उत्तिष्ठत जाग्रत प्राप्य वरान्निबोधत।</div>
+    <div class="verse-sub">"ARISE, AWAKE, AND STOP NOT TILL THE GOAL IS REACHED" · KATHA UPANISHAD</div>
+    <h2 class="q-title">Every struggle begins with an honest question.</h2>
+    <p class="q">What happened?</p>
+    <p class="q">What are you afraid of?</p>
+    <p class="q">What are you assuming about yourself?</p>
+    <p class="q" style="margin-bottom:0">What can you actually control?</p>
+  </div>
+</section>
+
+<!-- INNER UNIVERSE (INTERACTIVE MIND GALAXY) -->
+<section class="inner-universe" id="inner-universe" aria-label="The inner universe">
+  <div class="universe-intro">
+    <div>
+      <p class="eyebrow">THE INNER UNIVERSE</p>
+      <h2 class="big-h">See what the mind carries.</h2>
+    </div>
+    <p class="universe-copy">Your struggle is rarely one thing. Fear, failure, comparison and pressure orbit each other. Hover a thought and watch the mind respond. This is the visual heartbeat of Darpan.</p>
+  </div>
+
+  <div class="universe-stage" id="universe-stage">
+    <canvas id="uni" aria-label="Interactive mind universe" role="img"></canvas>
+    <div id="nq" aria-live="polite"></div>
+    <div id="wowt"></div>
+    <div class="mini-archival" aria-hidden="true">
+      <div class="mini-archival-frame">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Swami_Vivekananda_1893_Chicago_Pose_color.png" alt="" />
+      </div>
+      <span class="mini-archival-label">Swami Vivekananda</span>
+    </div>
+    <div class="universe-hud">
+      <div class="hud-pill"><span class="hud-dot"></span> INTERACTIVE MIND MAP</div>
+      <div class="hud-note">Move your cursor. Hover a thought. Let the orbit slow.<br><b style="color:#F3B56A">Click a thought to focus it.</b></div>
+    </div>
+    <div class="wisdom-beacon" aria-label="Swami Vivekananda archival reference">
+      <div class="wisdom-avatar"></div>
+      <div><strong>THE VOICE BEHIND THE IDEA</strong><span>Inspired by documented teachings</span></div>
+    </div>
+    <div class="center-sigil" aria-hidden="true"><span>दर्पण</span><small>REFLECTION · COURAGE · ACTION</small></div>
+    <div class="universe-bottom">
+      <div class="orbit-legend">
+        <span><i class="legend-problem"></i>inner struggle</span>
+        <span><i class="legend-strength"></i>inner strength</span>
+      </div>
+      <button class="btn universe-btn" id="universeBegin">OPEN THE CHAT →</button>
+    </div>
+  </div>
+
+  <div class="universe-caption">
+    <span>CHAOS</span>
+    <span>PAUSE</span>
+    <span>CLARITY</span>
+    <span>SOURCE</span>
+    <span>ACTION</span>
+  </div>
+</section>
+
+<!-- ENTRY SECTION / CHAT LAUNCH SANCTUARY -->
+<section class="entry" id="reflect">
+  <div class="chat-launch">
+    <div class="chat-launch-top">
+      <div>
+        <p class="eyebrow" style="margin-bottom:10px">A PRIVATE SPACE TO THINK ALOUD</p>
+        <h2>What’s on your mind?</h2>
+        <p class="small">Start anywhere. We’ll take it one thoughtful question at a time.</p>
+      </div>
+      <span class="chat-avatar" aria-hidden="true">D</span>
+    </div>
+    
+    <div class="mentor-welcome">
+      <span class="chat-avatar" aria-hidden="true">D</span>
+      <div>
+        <small>DARPAN · HERE WITH YOU</small>
+        <p>Hi. What has been weighing on you lately? You can put it in your own words.</p>
+      </div>
+    </div>
+
+    <div class="journal-box">
+      <textarea id="sit" aria-label="Message Darpan" placeholder="Write a message to Darpan…"></textarea>
+    </div>
+
+    <div class="chips" id="chips"></div>
+    <button class="btn go" id="begin">SEND TO DARPAN ↑</button>
+  </div>
+</section>
+
+<!-- JOURNEY CHAT CONTAINER -->
+<section id="journey" aria-live="polite"></section>
+
+<!-- FOUR WORLDS / SELF-DEVELOPMENT PATHWAYS -->
+<section class="worlds" id="worlds" aria-label="Darpan experiences">
+  <div class="worlds-head">
+    <p class="eyebrow">FOUR PATHWAYS TO INNER STRENGTH</p>
+    <h2 class="big-h">A mentor should feel like a world, not a window.</h2>
+    <p>Use the same source-grounded intelligence through different moments: a morning reflection, a parable of wisdom, a quiet breathing reset, or the archival library.</p>
+  </div>
+
+  <div class="world-grid">
+    <article class="world-card morning" onclick="document.querySelector('#reflect').scrollIntoView({behavior:'smooth'})">
+      <div class="world-card-media">
+        <img src="/static/card-morning.png" alt="01 · Morning Session" loading="lazy" />
+      </div>
+      <div class="world-card-content">
+        <span class="world-index">01 · MORNING SESSION</span>
+        <h3>Start with one honest question.</h3>
+        <p>Bring pressure, comparison or doubt into a calm conversation instead of carrying it through the day.</p>
+        <button class="world-link" data-target="#reflect" type="button">OPEN REFLECTION →</button>
+      </div>
+    </article>
+
+    <article class="world-card parable" onclick="document.querySelector('#teachings').scrollIntoView({behavior:'smooth'})">
+      <div class="world-card-media">
+        <img src="/static/card-parable.png" alt="02 · Parable Weaver" loading="lazy" />
+      </div>
+      <div class="world-card-content">
+        <span class="world-index">02 · PARABLE WEAVER</span>
+        <h3>Sometimes a story opens the locked door.</h3>
+        <p>Turn an abstract teaching into a short, source-grounded parable that helps the user see their situation differently.</p>
+        <button class="world-link" data-target="#teachings" type="button">EXPLORE TEACHINGS →</button>
+      </div>
+    </article>
+
+    <article class="world-card grove" onclick="document.querySelector('#pause').classList.add('open')">
+      <div class="world-card-media">
+        <img src="/static/card-grove.png" alt="03 · Grove of Strength" loading="lazy" />
+      </div>
+      <div class="world-card-content">
+        <span class="world-index">03 · GROVE OF STRENGTH</span>
+        <h3>Pause long enough to hear yourself.</h3>
+        <p>A gentle breathing and reflection space — designed as an interlude, not a clinical or therapeutic feature.</p>
+        <button class="world-link" id="grovePause" type="button">TAKE A PAUSE →</button>
+      </div>
+    </article>
+
+    <article class="world-card archive" onclick="document.querySelector('#teachings').scrollIntoView({behavior:'smooth'})">
+      <div class="world-card-media">
+        <img src="/static/card-archive.png" alt="04 · Playcard Archive" loading="lazy" />
+      </div>
+      <div class="world-card-content">
+        <span class="world-index">04 · PLAYCARD ARCHIVE</span>
+        <h3>Collect wisdom you can return to.</h3>
+        <p>Explore source-backed teachings as elegant cards with the work, volume and page — never an invented citation.</p>
+        <button class="world-link" data-target="#teachings" type="button">OPEN ARCHIVE →</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- BREATHING PAUSE DIALOG -->
+<div id="pause" role="dialog" aria-label="A moment to pause">
+  <div>
+    <h2>Before the next answer,<br>take one breath.</h2>
+    <div class="orb" id="orb"></div>
+    <p id="pstate">Ready</p>
+    <p class="small" id="ptime" style="margin:10px auto 26px">60 seconds</p>
+    <button class="btn" id="pgo" style="background:var(--saf);border-color:var(--saf);color:var(--dark)">BEGIN</button>
+  </div>
+</div>
+
+<!-- TEACHINGS LIBRARY & COMPLETE WORKS -->
+<section class="lib" id="teachings">
+  <p class="eyebrow">GROUNDED IN DOCUMENTED WISDOM</p>
+  <h2 class="big-h">The Teachings</h2>
+  <div class="cats" id="cats"></div>
+  <div class="panel" id="tpanel"><p class="small">Choose a theme to see its documented passages.</p></div>
+  
+  <h2 class="big-h" style="margin-top:14vh;font-size:clamp(32px,4vw,56px)">The Complete Works</h2>
+  <div class="shelf" id="shelf"></div>
+  <div class="panel" id="vpanel"></div>
+</section>
+
+<!-- MY REFLECTIONS JOURNAL -->
+<section class="jr" id="journal">
+  <span class="tag">YOUR THOUGHTS, KEPT GENTLY</span>
+  <h2 class="big-h">My Reflections</h2>
+  <p class="small" style="margin-top:12px">Every finished conversation plants a flower. Open your sanctuary to revisit what you shared, the idea you carried forward, and your next step.</p>
+  <p><a class="btn" href="/static/growth-pond.html" target="_blank" rel="noopener">OPEN MY REFLECTIONS ↗</a></p>
+  <div class="entries" id="entries"></div>
+</section>
+
+<!-- ARCHIVAL VOICE / AUTHENTICITY NOTE -->
+<section class="dark stage" id="voice">
+  <div class="voice">
+    <div>
+      <h2 class="big-h">The voice behind the idea</h2>
+      <p style="margin-top:28px;max-width:30em;opacity:.85;font-size:17px">Darpan draws on the documented writings, speeches and lectures of Swami Vivekananda. It brings those teachings to a young person's real problem, one question at a time.</p>
+      <p class="stmt">Darpan is not Swami Vivekananda. It is an AI reflection system inspired by documented teachings.</p>
+    </div>
+    <div class="voice-image">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Swami_Vivekananda_August_1893.jpg" alt="Swami Vivekananda, 1893 archival photograph" loading="lazy">
+      <span>Archival photograph · public-domain image from Wikimedia Commons</span>
+    </div>
+  </div>
+</section>
+
+<!-- MOBILE NAVIGATION DOCK -->
+<div class="mobile-dock" aria-label="Quick navigation">
+  <a href="#reflect"><span>⌕</span>Reflect</a>
+  <a href="#inner-universe"><span>◉</span>Mind</a>
+  <a href="#teachings"><span>▤</span>Archive</a>
+  <a href="/static/growth-pond.html" target="_blank" rel="noopener"><span>✦</span>Journal ↗</a>
+</div>
+
+<footer>DARPAN · Digital Mentor inspired by documented teachings of Swami Vivekananda</footer>
+
+<!-- ==========================================================
+     TIMELINE DIAL SWITCHER SCRIPT (ENHANCEMENT)
+     ========================================================== -->
+<script>
+// Timeline Dial Interactive Chapter Switching
+document.querySelectorAll('.dial-year-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.dial-year-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const ch = btn.dataset.ch;
+    const year = btn.dataset.year;
+    const loc = btn.dataset.loc;
+    const title = btn.dataset.title;
+    const lede = btn.dataset.lede;
+    const quote = btn.dataset.quote;
+
+    const badge = document.querySelector('#heroChapterBadge');
+    const era = document.querySelector('#heroChapterEra');
+    const titleEl = document.querySelector('#heroChapterTitle');
+    const ledeEl = document.querySelector('#heroChapterLede');
+    const quoteEl = document.querySelector('#heroChapterQuote');
+
+    if(badge) badge.textContent = `CHAPTER 0${ch} / 06`;
+    if(era) era.textContent = `${year} · ${loc}`;
+    if(titleEl) titleEl.innerHTML = `${title.replace(/born|Touch|vow|America|Worship|Legacy/i, m => `<span class="big">${m}</span>`)}`;
+    if(ledeEl) ledeEl.textContent = lede;
+    if(quoteEl) quoteEl.innerHTML = quote;
+  });
+});
+</script>
+
+<!-- ==========================================================
+     ORIGINAL VERBATIM APPLICATION & BACKEND JAVASCRIPT LOGIC
+     ========================================================== -->
+<script>
+const $=s=>document.querySelector(s),el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* ---- Backend contract: swap ENDPOINT; frontend never depends on more than this ---- */
+const chatService={ENDPOINT:'/api/chat',
+async sendMessage(message,messages,context,sessionId){
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),90000);
+ try{const r=await fetch(this.ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,messages,context,session_id:sessionId}),signal:controller.signal});
+ const d=await r.json().catch(()=>({}));
+ if(!r.ok)throw new Error(d.detail||`Request failed (${r.status})`);
+ return{...d,reply:d.reply||'',sourceType:d.sourceType||null,sources:Array.isArray(d.sources)?d.sources:[],interpretation:d.interpretation||'',reflectionQuestion:d.reflectionQuestion||'',nextAction:d.nextAction||''}
+ }catch(e){
+  if(e.name==='AbortError')throw new Error('The mentor reply took too long. Your message is still here; please retry.');
+  if(e instanceof TypeError||/failed to fetch|networkerror|load failed/i.test(e.message||'')){
+   const openedFromFile=location.protocol==='file:';
+   const wrongOrigin=location.port&&location.port!=='8000';
+   const where=openedFromFile?'Open http://127.0.0.1:8000 in your browser (do not open the HTML file directly).':wrongOrigin?'Open http://127.0.0.1:8000 in your browser so chat uses the FastAPI server.':'Start or restart the FastAPI server with: uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000';
+   throw new Error('Cannot reach the Darpan backend. '+where);
+  }
+  throw e
+ }finally{clearTimeout(timer)}}};
+/* Connect the conversational backend to the visual mind universe.
+   The backend can later return explicit focusNodes; until then we infer
+   lightweight UI highlights from the user's own words. */
+
+/* Optional backend enhancement:
+   focusNodes / highlightNodes: ['fear','failure'] to drive the 3D universe directly.
+   The current frontend remains compatible with { reply: "..." }. */
+function syncMindFromText(text, explicit=[]) {
+  const aliases = {
+    fear:['fear','afraid','scared','terrified','anxious'],
+    failure:['failure','failed','fail','exam','rejected'],
+    doubt:['doubt','doubting','uncertain','inadequate','incapable'],
+    comparison:['comparison','compare','comparing','others'],
+    pressure:['pressure','burden','expectation','family'],
+    confusion:['confusion','confused','lost','unclear'],
+    rejection:['rejection','rejected','no'],
+    purpose:['purpose','meaning','future','career'],
+    courage:['courage','brave','fearless','act'],
+    discipline:['discipline','practice','routine','consistency'],
+    'self-belief':['self-belief','self belief','confidence','capable','ability']
+  };
+  const s=String(text||'').toLowerCase();
+  const found=[...new Set([
+    ...explicit.map(x=>String(x).toLowerCase()),
+    ...Object.entries(aliases).filter(([,words])=>words.some(w=>s.includes(w))).map(([k])=>k)
+  ])];
+  if(window.vivekaHighlight) window.vivekaHighlight(found);
+  return found;
+}
+/* portrait */
+(()=>{const p=$('#portrait'),s=p.dataset.src;if(s){p.querySelector('.ph').style.backgroundImage=`url(${s})`;p.classList.add('has')}})();
+/* dust */
+for(let i=0;i<22;i++){const d=el('i');d.style.cssText=`left:${Math.random()*100}%;top:${60+Math.random()*50}%;animation-duration:${14+Math.random()*18}s;animation-delay:${-Math.random()*20}s`;$('#dust').appendChild(d)}
+/* cursor-reactive mandala + parallax */
+const hero=$('.hero');hero.addEventListener('pointermove',e=>{const x=(e.clientX/innerWidth-.5)*24,y=(e.clientY/innerHeight-.5)*24;$('#mandala').style.transform=`translate(${x}px,${y}px)`});
+addEventListener('scroll',()=>{$('#portrait').style.transform=`translateY(${scrollY*.12}px)`},{passive:true});
+/* questions reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('on',e.isIntersecting&&e.intersectionRatio>.6)),{threshold:[.6]});
+document.querySelectorAll('.q').forEach(q=>io.observe(q));
+/* chips */
+const seeds={Failure:'I failed and I feel ',Fear:'I am afraid of ',  'Self-doubt':'I doubt that I am ',Purpose:'I do not know what I am meant to do with ',Decision:'I must decide between ',Comparison:'I keep comparing myself to '};
+Object.keys(seeds).forEach(k=>{const b=el('button','chip',k);b.setAttribute('aria-pressed','false');b.onclick=()=>{document.querySelectorAll('#chips .chip').forEach(c=>c.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');if(!$('#sit').value.trim())$('#sit').value=seeds[k];$('#sit').focus()};$('#chips').appendChild(b)});
+/* journey */
+let history=[],situation='',pick='',sessionId=null,journeyContext={};
+const J=$('#journey');
+const add=n=>{const thread=$('#chat-thread');(thread||J).appendChild(n);if(thread)thread.scrollTop=thread.scrollHeight;else n.scrollIntoView({behavior:'smooth',block:'start'});return n};
+function chatRow(role,label,content){return el('div',`chat-row ${role}`,`<div class="chat-label">${esc(label)}</div><div class="chat-bubble">${content}</div>`)}
+async function persistSession(messages=history,context=journeyContext){if(!sessionId||!messages.length)return;const savedContext={...context,outcome:context.outcome||'Conversation in progress; saved automatically.'};try{const response=await fetch('/api/session/end',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,messages,context:savedContext})});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.detail||'Could not save this conversation.');const record=data.record||{},conversation=record.conversation||messages,lastAssistant=[...conversation].reverse().find(message=>message.role==='assistant');const item={id:record.session_id||sessionId,date:record.ended_at||new Date().toISOString(),topic:record.main_topic||record.problem||'A student conversation',studentReflection:record.student_reflection||null,control:record.what_i_can_control||null,next:record.practical_next_step||null,teaching:record.reflection_teaching||lastAssistant?.content||'Conversation in progress',interpretation:record.reflection_interpretation||record.ai_interpretation||null,source:(record.relevant_teachings_and_sources||[])[0]||null,record};let prior=[];try{const parsed=JSON.parse(localStorage.getItem('darpan')||localStorage.getItem('viveka')||'[]');if(Array.isArray(parsed))prior=parsed}catch(error){console.warn('Saved reflection data was unreadable; replacing it with this session.',error)}const saved=[item,...prior.filter(entry=>entry&&entry.id!==item.id)].slice(0,16);localStorage.setItem('darpan',JSON.stringify(saved));localStorage.setItem('viveka',JSON.stringify(saved));loadJ()}catch(error){console.warn('Could not autosave the conversation to My Reflections:',error)}}
+$('#heroBegin').onclick=()=>$('#reflect').scrollIntoView({behavior:'smooth'});
+$('#begin').onclick=async()=>{situation=$('#sit').value.trim();if(!situation){$('#sit').placeholder='Begin with a few honest words…';$('#sit').focus();return}const startButton=$('#begin');startButton.disabled=true;startButton.textContent='OPENING YOUR SPACE…';try{const response=await fetch('/api/session/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({problem:situation})});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.detail||'Could not start a conversation.');J.innerHTML='<div class="chat-shell"><div class="chat-head"><div class="chat-brand"><span class="chat-avatar">D</span><span>Darpan <small style="display:block;font-weight:400;color:#806f5b;margin-top:3px">A quiet space to think things through</small></span></div><span class="chat-progress" id="chat-progress">QUESTION 1 OF 6</span></div><div class="chat-thread" id="chat-thread" role="log" aria-live="polite" aria-relevant="additions"></div><div class="chat-composer" id="chat-composer"></div></div><div class="source-note" id="chat-source-note"></div>';J.classList.add('open');history=[{role:'user',content:situation}];sessionId=data.session_id;pick='';journeyContext=data.context||{};syncMindFromText(situation);add(chatRow('user','You',esc(situation)));if(data.acknowledgement){add(chatRow('bot','Darpan',esc(data.acknowledgement)));history.push({role:'assistant',content:[data.acknowledgement,data.question].filter(Boolean).join('\n\n'),follow_up:data.question||''})}showQuestion(data.question,1);void persistSession(history,journeyContext)}catch(error){startButton.disabled=false;startButton.textContent='OPEN CHAT →';const note=el('p','chat-error');note.textContent=error.message;startButton.after(note)}};
+let liveCapture=null;
+function wavBlob(frames,sampleRate){const total=frames.reduce((n,x)=>n+x.length,0),input=new Float32Array(total);let cursor=0;for(const frame of frames){input.set(frame,cursor);cursor+=frame.length}const ratio=sampleRate/16000,count=Math.floor(total/ratio),buffer=new ArrayBuffer(44+count*2),view=new DataView(buffer);const write=(o,s)=>{for(let i=0;i<s.length;i++)view.setUint8(o+i,s.charCodeAt(i))};write(0,'RIFF');view.setUint32(4,36+count*2,true);write(8,'WAVE');write(12,'fmt ');view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,1,true);view.setUint32(24,16000,true);view.setUint32(28,32000,true);view.setUint16(32,2,true);view.setUint16(34,16,true);write(36,'data');view.setUint32(40,count*2,true);for(let i=0;i<count;i++){const position=i*ratio,base=Math.floor(position),a=input[base]||0,b=input[Math.min(base+1,total-1)]??a,mixed=a+(b-a)*(position-base),sample=Math.max(-1,Math.min(1,mixed));view.setInt16(44+i*2,sample<0?sample*0x8000:sample*0x7fff,true)}return new Blob([buffer],{type:'audio/wav'})}
+let voiceRecognition=null;
+async function stopVoice(button,input){if(voiceRecognition){voiceRecognition.stop();return}if(!liveCapture)return;const state=liveCapture;liveCapture=null;clearTimeout(state.limit);try{state.processor.disconnect();state.source.disconnect();state.mute.disconnect();state.stream.getTracks().forEach(track=>track.stop());if(state.ctx.state!=='closed')await state.ctx.close()}catch(error){console.warn('Microphone cleanup:',error)}button.classList.remove('recording');button.textContent='🎙 Speak';button.disabled=true;const status=$('#voice-status');if(!state.frames.length){if(status)status.textContent='No microphone audio was captured. Check your input device and try again.';button.disabled=false;return}if(status)status.textContent='Transcribing with Sarvam…';try{const blob=wavBlob(state.frames,state.rate),form=new FormData();form.append('file',blob,'viveka-voice.wav');form.append('language_code',$('#voice-language')?.value||'en-IN');const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);let response;try{response=await fetch('/api/voice/transcribe',{method:'POST',body:form,signal:controller.signal})}finally{clearTimeout(timer)}const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.detail||'Could not transcribe the recording.');input.value=[input.value.trim(),data.transcript].filter(Boolean).join(' ');input.dispatchEvent(new Event('input',{bubbles:true}));input.focus();if(status)status.textContent='Transcript ready · review it, then send'}catch(err){if(status)status.textContent=err.name==='AbortError'?'Sarvam is taking longer than expected. Try a shorter recording or type your message.':err.message}finally{button.disabled=false}}
+function startBrowserSpeechRecognition(button,input,status){const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;if(!Recognition)return false;const recognition=new Recognition();recognition.lang=$('#voice-language')?.value||'en-IN';recognition.continuous=false;recognition.interimResults=false;recognition.maxAlternatives=1;voiceRecognition=recognition;button.classList.add('recording');button.textContent='■ Stop listening';if(status)status.textContent='Listening in your browser…';recognition.onresult=event=>{const transcript=event.results?.[0]?.[0]?.transcript?.trim();if(!transcript)return;input.value=[input.value.trim(),transcript].filter(Boolean).join(' ');input.dispatchEvent(new Event('input',{bubbles:true}));input.focus();if(status)status.textContent='Transcript ready · review it, then send'};recognition.onerror=event=>{const reasons={ 'not-allowed':'Allow microphone access in your browser, then try again.','no-speech':'No speech was detected. Tap Speak and try again.','network':'Browser speech recognition needs an internet connection.'};if(status)status.textContent=reasons[event.error]||`Browser speech recognition failed (${event.error}).`;};recognition.onend=()=>{if(voiceRecognition===recognition)voiceRecognition=null;button.classList.remove('recording');button.textContent='🎙 Speak';button.disabled=false};try{recognition.start()}catch(error){voiceRecognition=null;button.classList.remove('recording');button.textContent='🎙 Speak';if(status)status.textContent=error.message||'Could not start browser speech recognition.'}return true}
+async function toggleVoice(button,input){if(voiceRecognition){voiceRecognition.stop();return}if(liveCapture){await stopVoice(button,input);return}const status=$('#voice-status');if(!navigator.mediaDevices?.getUserMedia){if(startBrowserSpeechRecognition(button,input,status))return;if(status)status.textContent='Microphone access needs HTTPS or localhost. Open Darpan at http://127.0.0.1:8000.';return}let stream,ctx;try{stream=await navigator.mediaDevices.getUserMedia({audio:{channelCount:1,echoCancellation:true,noiseSuppression:true}});const AudioContextClass=window.AudioContext||window.webkitAudioContext;if(!AudioContextClass)throw new Error('This browser does not support audio recording.');ctx=new AudioContextClass();const source=ctx.createMediaStreamSource(stream),processor=ctx.createScriptProcessor(4096,1,1),mute=ctx.createGain();mute.gain.value=0;const state={stream,ctx,source,processor,mute,frames:[],rate:ctx.sampleRate};processor.onaudioprocess=event=>{if(liveCapture===state)state.frames.push(new Float32Array(event.inputBuffer.getChannelData(0)))};source.connect(processor);processor.connect(mute);mute.connect(ctx.destination);await ctx.resume();if(ctx.state!=='running')throw new Error('The browser audio engine did not start. Check that this tab is not muted, then try again.');liveCapture=state;button.classList.add('recording');button.textContent='■ Stop · 12s';if(status)status.textContent='Listening · speak naturally, then tap Stop';state.limit=setTimeout(()=>{if(liveCapture===state)stopVoice(button,input)},12000)}catch(error){stream?.getTracks().forEach(track=>track.stop());if(ctx&&ctx.state!=='closed')await ctx.close().catch(()=>{});console.error('Microphone startup failed:',error);if(status)status.textContent=error.name==='NotAllowedError'?'Allow microphone access, then tap Speak again.':error.message||'Could not start the microphone. Check your browser permissions.'}}
+let questionAudio=null,questionAudioURL=null,voiceRun=0;
+async function speakQuestion(text){const language=$('#voice-language')?.value||'en-IN',status=$('#voice-status'),run=++voiceRun;if(questionAudio){questionAudio.pause();questionAudio=null}if(questionAudioURL){URL.revokeObjectURL(questionAudioURL);questionAudioURL=null}if(status)status.textContent='Preparing Sarvam voice…';try{const response=await fetch('/api/voice/speak',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text,language_code:language})});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.detail||'Sarvam speech is unavailable.');if(run!==voiceRun)return;const bytes=Uint8Array.from(atob(data.audio_base64),char=>char.charCodeAt(0)),audioBlob=new Blob([bytes],{type:data.content_type||'audio/wav'});questionAudioURL=URL.createObjectURL(audioBlob);const audio=new Audio(questionAudioURL);questionAudio=audio;try{await audio.play();if(status)status.textContent='Speaking with Sarvam · tap Listen to replay'}catch(playError){if(status)status.textContent='Sarvam audio is ready · tap “Listen to this question” to play'} }catch(error){if(run!==voiceRun)return;if(status)status.textContent=error.message+' · browser voice fallback';if(window.speechSynthesis&&window.SpeechSynthesisUtterance){window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang=language;utterance.rate=.96;window.speechSynthesis.speak(utterance)}}}
+function showQuestion(question,num){const composer=$('#chat-composer');if(!composer)return;question=question||'What feels most important for me to understand about this?';$('#chat-progress').textContent=Number(num)>6?'OPEN EXPLORATION':`QUESTION ${num} OF 6`;const row=chatRow('bot',Number(num)>6?'Darpan · Open reflection':`Darpan · ${num} of 6`,esc(question));const listen=el('button','listen-question','▶ Listen to this question');listen.type='button';listen.onclick=()=>{if(questionAudio){questionAudio.currentTime=0;questionAudio.play().catch(()=>speakQuestion(question))}else speakQuestion(question)};row.querySelector('.chat-bubble').appendChild(listen);add(row);composer.innerHTML=`<div class="voice-controls"><select id="voice-language" aria-label="Voice language"><option value="en-IN">English</option><option value="hi-IN">हिन्दी</option></select><button type="button" class="voice-button" id="voice-record">🎙 Speak</button><span id="voice-status" aria-live="polite"></span></div><textarea id="ans-${num}" aria-label="Your answer" placeholder="Write a message…"></textarea><button class="btn" id="ansgo-${num}">SEND ↑</button>`;const input=$(`#ans-${num}`),button=$(`#ansgo-${num}`),mic=$('#voice-record');button.onclick=()=>ask(num);mic.onclick=()=>toggleVoice(mic,input);input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();button.click()}});input.focus();speakQuestion(question)}
+function showSessionChoice(text){const row=chatRow('bot','Darpan · Your choice',esc(text));add(row);speakQuestion(text);const composer=$('#chat-composer');composer.innerHTML='<div class="session-choice"><button class="btn" type="button" data-choice="guidance">HEAR A VERIFIED THOUGHT →</button><button class="btn ghost" type="button" data-choice="explore">KEEP EXPLORING →</button></div>';composer.querySelectorAll('[data-choice]').forEach(button=>button.onclick=()=>chooseSessionPath(button.dataset.choice))}
+async function chooseSessionPath(choice){const composer=$('#chat-composer'),buttons=composer.querySelectorAll('button');buttons.forEach(button=>button.disabled=true);const lastAnswer=[...history].reverse().find(item=>item.role==='user')?.content||situation;const t=add(chatRow('bot','Darpan','<span class="think" aria-label="Darpan is thinking"><i></i><i></i><i></i></span>'));try{const context={...journeyContext,conversation_choice:choice};const d=await chatService.sendMessage(lastAnswer,history,context,sessionId);sessionId=d.session_id;journeyContext=d.context||context;t.remove();if(d.phase==='exploration'){history.push({role:'assistant',content:[d.acknowledgement,d.reflectionQuestion].filter(Boolean).join('\n\n'),follow_up:d.reflectionQuestion||''});if(d.acknowledgement)add(chatRow('bot','Darpan',esc(d.acknowledgement)));showQuestion(d.reflectionQuestion,7)}else{history.push({role:'assistant',content:[d.acknowledgement,d.reply,d.interpretation].filter(Boolean).join('\n\n'),passages:d.sources||[],interpretation:d.interpretation||''});if(d.acknowledgement)add(chatRow('bot','Darpan',esc(d.acknowledgement)));$('#chat-progress').textContent='REFLECTION';render(d)}void persistSession(history,journeyContext)}catch(error){t.remove();const note=el('div','chat-error');note.textContent=error.message;composer.prepend(note);buttons.forEach(button=>button.disabled=false)}}
+async function ask(num){const input=$(`#ans-${num}`),button=$(`#ansgo-${num}`),a=input.value.trim();if(!a){input.focus();return}$('#chat-error')?.remove();document.querySelectorAll('.chat-row.failed').forEach(row=>row.remove());button.disabled=true;input.disabled=true;const candidate=[...history,{role:'user',content:a}];syncMindFromText(situation+' '+a);const sent=add(chatRow('user','You',esc(a)));sent.classList.add('pending');$('#chat-progress').textContent='SENDING…';const t=add(chatRow('bot','Darpan','<span class="think" aria-label="Darpan is thinking"><i></i><i></i><i></i></span>'));try{const d=await chatService.sendMessage(a,candidate,journeyContext,sessionId);history=candidate;sessionId=d.session_id;journeyContext=d.context||journeyContext;sent.classList.remove('pending');t.remove();syncMindFromText(situation+' '+a,d.focusNodes||[]);if(d.phase==='choice'){history.push({role:'assistant',content:d.acknowledgement||''});void persistSession(history,journeyContext);showSessionChoice(d.acknowledgement);return}history.push({role:'assistant',content:[d.acknowledgement,d.reply,d.reflectionQuestion].filter(Boolean).join('\n\n'),passages:d.sources||[],interpretation:d.interpretation||'',follow_up:d.reflectionQuestion||''});void persistSession(history,journeyContext);if(d.phase==='exploration'){add(chatRow('bot','Darpan',esc(d.acknowledgement||d.reply)));showQuestion(d.reflectionQuestion,Math.min(6,(journeyContext.questions_asked_count||num+1)))}else{if(d.acknowledgement)add(chatRow('bot','Darpan',esc(d.acknowledgement)));$('#chat-progress').textContent='REFLECTION';render(d)}}catch(e){void persistSession(candidate,{...journeyContext,responses:[...new Set([...(journeyContext.responses||[]),a])]});t.remove();sent.classList.remove('pending');sent.classList.add('failed');sent.querySelector('.chat-label').textContent='You · not sent yet';$('#chat-progress').textContent='RETRY MESSAGE';button.disabled=false;input.disabled=false;let note=el('div','chat-error');note.textContent=e.message+' Your draft is still here. Fix the issue and press Send to retry.';$('#chat-composer').prepend(note);input.focus()}}
+function render(d,err){
+ const src=(d.sources||[]).find(s=>s&&s.title&&s.text);
+ const passage=src?.text||'', excerptEnd=passage.length>420?Math.max(220,passage.lastIndexOf(' ',420)):passage.length, excerpt=passage.slice(0,excerptEnd);
+ const srcHTML=src?`<div class="manu"><span class="tag">SOURCE-SUPPORTED MATERIAL · 📜</span><p><b class="tag" style="margin-bottom:6px">DARPAN’S SHORT SUMMARY · AI PARAPHRASE</b>${esc(d.reply)}</p><div class="meta"><div><b>AUTHOR</b>Swami Vivekananda</div><div><b>WORK</b>${esc(src.title)}</div><div><b>VOLUME</b>${esc(src.volume?`Volume ${src.volume}`:'Not explicitly identified on cited page')}</div><div><b>CHAPTER / HEADING</b>${esc(src.chapter||'Not listed in PDF text')}</div><div><b>SECTION</b>${esc(src.section||'Not listed in PDF text')}</div><div><b>PDF PAGE</b>${esc(src.page||'Not present in source metadata')}</div></div><div class="source-excerpt"><b>PASSAGE RETRIEVED FROM YOUR PDF${excerptEnd<passage.length?' · EXCERPT':''}</b><blockquote>${esc(excerpt)}${excerptEnd<passage.length?'…':''}</blockquote>${excerptEnd<passage.length?`<details><summary>View full retrieved passage</summary><blockquote>${esc(passage)}</blockquote></details>`:''}</div></div>`
+ :`<div class="verify"><span class="tag" style="font-style:normal;font-family:var(--sans)">SOURCE NOTE</span><p>I couldn’t confidently connect a passage in the indexed books to this situation, so I’ll keep this reflection in Darpan’s own voice rather than attribute it to Swamiji.</p></div>`;
+ const s=el('div','step',`<div class="src"><span class="tag" style="color:var(--gold)">${src?'SOURCE USED FOR THIS REFLECTION':'A NOTE ABOUT SOURCES'}</span>${srcHTML}</div><div class="ai"><span class="tag">AI INTERPRETATION · ✦ — not Swami Vivekananda speaking</span><p>${esc(d.interpretation||'')}</p></div>`);
+ $('#chat-source-note').replaceChildren(s);const shorts=el('section','shorts-panel',`<div class="shorts-head"><div><span class="tag">A LITTLE MORE TO EXPLORE</span><h3>Two short videos for this topic</h3></div><p>Optional YouTube picks · watch here</p></div><div class="shorts-grid" id="short-results"><p class="small">Finding videos related to your conversation…</p></div>`);$('#chat-source-note').append(shorts);loadShorts(shorts);s.scrollIntoView({behavior:'smooth',block:'center'});
+ const q=d.reflectionQuestion||'What feels like the most useful thing to carry forward from this conversation?';
+ const opts=d.reflectionOptions?.length?d.reflectionOptions:['I see one thing more clearly.','I have a small next step.','I need more time to think.'];
+ const w=el('div','step within',`<span class="tag" style="color:var(--gold)">LOOK WITHIN · AI-GENERATED REFLECTION</span><h2>${esc(q)}</h2><div class="opts"></div>`);
+ opts.forEach(o=>{const b=el('button','opt',esc(o));b.onclick=()=>{w.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');pick=o;if(!$('#actstep'))action(d)};w.querySelector('.opts').appendChild(b)});
+ setTimeout(()=>add(w),300)}
+async function loadShorts(panel){const target=panel.querySelector('#short-results');target.innerHTML='<p class="small">Finding videos related to your conversation…</p>';try{const r=await fetch('/api/shorts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({context:journeyContext,messages:history})});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.detail||'YouTube search is temporarily unavailable.');const videos=(data.videos||[]).filter(video=>video?.id&&video?.title).slice(0,2);if(!videos.length){target.innerHTML='<div class="shorts-empty">YouTube did not return videos for this topic just now.<br><button class="shorts-retry" type="button">Try video search again</button></div>';target.querySelector('.shorts-retry').onclick=()=>loadShorts(panel);return}target.replaceChildren();videos.forEach((video,index)=>{const card=el('article','short-card');const player=el('div','short-play');const thumbnail=document.createElement('img');thumbnail.src=`https://i.ytimg.com/vi/${encodeURIComponent(video.id)}/hqdefault.jpg`;thumbnail.alt='';thumbnail.loading='lazy';thumbnail.onerror=()=>{thumbnail.style.display='none'};player.appendChild(thumbnail);const trigger=el('button','short-trigger','<span aria-hidden="true">▶</span>');trigger.type='button';trigger.setAttribute('aria-label',`Play ${video.title} here`);trigger.onclick=()=>{const frame=document.createElement('iframe');frame.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.id)}?autoplay=1&playsinline=1&rel=0`;frame.title=video.title;frame.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';frame.allowFullscreen=true;frame.referrerPolicy='strict-origin-when-cross-origin';player.replaceChildren(frame)};player.appendChild(trigger);card.appendChild(player);card.appendChild(el('h4',null,esc(video.title)));card.appendChild(el('p','short-caption',`YOUTUBE SHORT · ${String(index+1).padStart(2,'0')} · TAP TO PLAY HERE`));target.appendChild(card)})}catch(err){target.innerHTML=`<div class="shorts-empty">${esc(err.message)}<br><button class="shorts-retry" type="button">Try video search again</button></div>`;target.querySelector('.shorts-retry').onclick=()=>loadShorts(panel)}}
+function action(d){
+ const s=el('div','step',`<p class="mentor" style="margin-top:0">Understanding is not the end.<br><em>What would you like to carry into tomorrow?</em></p>
+ <div class="act"><div><label for="a1">WHAT I’M TAKING WITH ME</label><input id="a1" value="${esc(pick)}"></div><div><label for="a2">WHAT I CAN CONTROL</label><input id="a2" placeholder="One part I can influence."></div><div><label for="a3">MY NEXT STEP</label><input id="a3" placeholder="${esc(d.nextAction||'One small step that feels possible.')}" value="${esc(d.nextAction||'')}"></div></div>
+ <button class="btn" id="save">END SESSION · PLANT THIS REFLECTION →</button><p class="small" style="margin-top:12px">Your conversation summary will be saved, and this thought will be kept in My Reflections.</p>`);s.id='actstep';add(s);
+ $('#save').onclick=async()=>{const button=$('#save'),insight=$('#a1').value.trim(),control=$('#a2').value.trim(),next=$('#a3').value.trim();button.disabled=true;button.textContent='SAVING YOUR REFLECTION…';const status=el('p','carry','');add(status);try{if(!sessionId)throw new Error('Start a conversation before saving.');journeyContext.next_step=next||journeyContext.next_step||null;journeyContext.guidance=[...(journeyContext.guidance||[]),...(control?[`What I can control: ${control}`]:[]),...(next?[`Next step: ${next}`]:[])];journeyContext.outcome='Student ended the conversation and saved a reflection.';journeyContext.student_reflection=insight||null;journeyContext.control=control||null;journeyContext.reflection_teaching=d.reply||null;journeyContext.reflection_interpretation=d.interpretation||null;const closing=[insight&&`What I’m taking with me: ${insight}`,control&&`What I can control: ${control}`,next&&`My next step: ${next}`].filter(Boolean).join('\n');if(closing){history.push({role:'user',content:`Session reflection\n${closing}`});journeyContext.responses=[...(journeyContext.responses||[]),closing]}const response=await fetch('/api/session/end',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId,messages:history,context:journeyContext})});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.detail||'Could not save the session summary.');const item={id:data.record.session_id,date:new Date().toISOString(),topic:data.record.main_topic||situation.slice(0,56)||'A student reflection',studentReflection:insight||null,control:control||null,next:next||null,teaching:d.reply||null,interpretation:d.interpretation||null,source:(d.sources||[])[0]||null,record:data.record};let prior=[];try{const parsed=JSON.parse(localStorage.getItem('darpan')||localStorage.getItem('viveka')||'[]');if(Array.isArray(parsed))prior=parsed}catch(error){console.warn('Saved reflection data was unreadable; starting a fresh pond list.',error)}const saved=[item,...prior.filter(x=>x&&x.id!==item.id)].slice(0,16);localStorage.setItem('darpan',JSON.stringify(saved));localStorage.setItem('viveka',JSON.stringify(saved));loadJ(item.id);status.innerHTML='Your session is saved. <a href="/static/reflections.html?id='+encodeURIComponent(item.id)+'" target="_blank" rel="noopener">See your planted reflection →</a>';button.textContent='SESSION SAVED IN MY GARDEN ✓';button.disabled=true;setTimeout(()=>$('#journal').scrollIntoView({behavior:'smooth'}),350)}catch(err){status.textContent='Could not save this session: '+err.message;button.disabled=false;button.textContent='RETRY · SAVE MY REFLECTION →'}}}
+
+
+/* reference-inspired world actions */
+document.querySelectorAll('.world-link[data-target]').forEach(b=>{
+  b.addEventListener('click',()=>document.querySelector(b.dataset.target)?.scrollIntoView({behavior:'smooth'}));
+});
+const grovePause=$('#grovePause'); if(grovePause) grovePause.onclick=()=>openPause();
+
+/* pause */
+let pt;function openPause(){$('#pause').classList.add('open');$('#pstate').textContent='Ready';$('#pgo').style.display='';$('#pgo').textContent='BEGIN'}
+$('#pgo').onclick=()=>{$('#pgo').style.display='none';let n=60;const cyc=['Inhale','Hold','Exhale'],o=$('#orb');
+ const tick=()=>{const p=(60-n)%12;const ph=p<4?0:p<6?1:2;$('#pstate').textContent=cyc[ph];o.style.transform=ph===0?'scale(1)':ph===1?'scale(1)':'scale(.6)';$('#ptime').textContent=n+' seconds';
+  if(n--<=0){clearInterval(pt);$('#pstate').textContent='Now return to the question.';$('#ptime').textContent='';$('#pgo').style.display='';$('#pgo').textContent='CONTINUE';$('#pgo').onclick=()=>{$('#pause').classList.remove('open');$('#pgo').onclick=null;location.hash='';J.scrollIntoView()}}};
+ tick();pt=setInterval(tick,1000)};
+addEventListener('keydown',e=>{if(e.key==='Escape'){clearInterval(pt);$('#pause').classList.remove('open')}});
+
+/* library */
+const cats={Fearlessness:'Fear loses weight when it is examined rather than obeyed.',Strength:'Strength is built by what you repeatedly choose to do.',"Self-belief":'Doubt is a thought to be questioned, not a verdict.',Service:'Purpose often grows when attention turns outward.',Knowledge:'Understanding counts when it changes how you act.',Work:'Effort matters most when you stay present in it.',Discipline:'Small, steady practice outlasts bursts of intensity.',Freedom:'Freedom starts with noticing what you can choose.',Character:'Character is what remains when no one is watching.',Truth:'Look at the situation as it is, not as you fear it.'};
+Object.keys(cats).forEach(k=>{const b=el('button','cat',k);b.setAttribute('aria-pressed','false');b.onclick=()=>{document.querySelectorAll('.cat').forEach(c=>c.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+ $('#tpanel').innerHTML=`<p>${esc(cats[k])}</p><span class="tag">AI INTERPRETATION · ✦</span><p class="small" style="margin:8px 0 22px">Verified passages for “${esc(k)}” load from the knowledge base with title, volume and page. None is shown until they arrive: source verification required.</p><ul><li>Where in my life does ${esc(k.toLowerCase())} feel absent?</li><li>What is one small act of ${esc(k.toLowerCase())} I can do this week?</li></ul>`};$('#cats').appendChild(b)});
+const VOLUME_SUMMARIES = {
+  1: {
+    title: 'VOLUME 1 — WORKS OF SWAMI VIVEKANANDA',
+    badge: 'Vedanta · Karma · Bhakti · Raja & Jnana Yoga',
+    paragraphs: [
+      'Volume 1 introduces Swami Vivekananda’s central ideas on Vedanta, Karma Yoga, Bhakti Yoga, Raja Yoga, and Jnana Yoga.',
+      'He explains how every person has a divine potential and can discover strength, fearlessness, and inner freedom.',
+      'The volume connects spirituality with practical life, showing that service to humanity is a form of worship.'
+    ],
+    overall: 'Overall, it teaches us to become strong, selfless, disciplined, and aware of the divinity within ourselves.'
+  },
+  2: {
+    title: 'VOLUME 2 — WORKS OF SWAMI VIVEKANANDA',
+    badge: 'Mind · Meditation · Harmony of Paths',
+    paragraphs: [
+      'Volume 2 continues his teachings on the mind, meditation, Vedanta, and the deeper meaning of religion.',
+      'Swamiji explains that true religion is not merely belief or ritual, but the direct realization of the Divine within.',
+      'He discusses the harmony of different spiritual paths and encourages people to develop both knowledge and compassion.'
+    ],
+    overall: 'The central message is to know yourself, control your mind, and live with courage, purity, and purpose.'
+  },
+  3: {
+    title: 'VOLUME 3 — WORKS OF SWAMI VIVEKANANDA',
+    badge: 'Practical Vedanta · Strength & Unity',
+    paragraphs: [
+      'Volume 3 explores practical Vedanta, the power of the mind, education, social questions, and the spiritual development of humanity.',
+      'Swamiji emphasizes that strength is essential and that weakness should never become an excuse for giving up.',
+      'He speaks about serving others, respecting all religions, and recognizing the same divine reality in every human being.'
+    ],
+    overall: 'Overall, the volume encourages fearless action, self-confidence, unity, and service.'
+  },
+  4: {
+    title: 'VOLUME 4 — WORKS OF SWAMI VIVEKANANDA',
+    badge: 'Raja Yoga · Concentration · Direct Experience',
+    paragraphs: [
+      'Volume 4 contains teachings on Raja Yoga, meditation, the mind, concentration, and the scientific approach to spiritual practice.',
+      'Swamiji explains how disciplined thought and meditation can help a person understand the deeper nature of consciousness.',
+      'He also discusses Vedanta, freedom, and the relationship between the individual soul and the universal reality.'
+    ],
+    overall: 'The message is simple: train the mind, discover your inner strength, and move toward freedom through direct experience.'
+  },
+  5: {
+    title: 'VOLUME 5 — WORKS OF SWAMI VIVEKANANDA',
+    badge: 'Everyday Action · Character & Conversations',
+    paragraphs: [
+      'Volume 5 presents lectures, conversations, letters, and teachings covering Vedanta, religion, society, education, and practical spirituality.',
+      'Swamiji repeatedly stresses that spirituality must be expressed through character, courage, love, and service.',
+      'His conversations reveal his direct and practical way of answering questions about life, God, work, and human nature.'
+    ],
+    overall: 'Overall, the volume encourages us to turn spiritual ideas into everyday action and become useful to the world.'
+  },
+  6: {
+    title: 'VOLUME 6 — WORKS OF SWAMI VIVEKANANDA',
+    badge: 'Unity of Religions · Philosophy & Discipline',
+    paragraphs: [
+      'Volume 6 brings together more lectures, conversations, poems, translations, letters, and discussions on Vedanta and Indian spirituality.',
+      'Swamiji explains the unity behind different religions and encourages people to look beyond superficial differences.',
+      'His teachings combine deep philosophy with practical advice about character, discipline, service, and fearlessness.'
+    ],
+    overall: 'The volume reminds us that spiritual growth means realizing our inner divinity while working for the good of others.'
+  },
+  7: {
+    title: 'VOLUME 7 — WORKS OF SWAMI VIVEKANANDA',
+    badge: 'Awakening India · Nation-Building & Compassion',
+    paragraphs: [
+      'Volume 7 contains important teachings on India, Vedanta, religion, society, education, and the future of humanity.',
+      'Swamiji speaks passionately about awakening India through strength, education, self-respect, unity, and service to the poor.',
+      'He also explains spiritual ideas such as the Atman, Brahman, freedom, and the harmony of religions.'
+    ],
+    overall: 'Overall, the volume inspires us to combine spiritual wisdom with nation-building, compassion, courage, and practical work.'
+  },
+  8: {
+    title: 'VOLUME 8 — WORKS OF SWAMI VIVEKANANDA',
+    badge: 'Fearless Living · Inner Potential',
+    paragraphs: [
+      'Volume 8 includes many lectures, conversations, letters, and teachings that show Swamiji’s practical approach to spirituality and human life.',
+      'He discusses Vedanta, meditation, religion, character-building, service, and the importance of seeing divinity in everyone.',
+      'The volume also gives insight into his interactions with disciples and students and his responses to everyday questions.'
+    ],
+    overall: 'Its core message is to live fearlessly, think deeply, serve selflessly, and realize the divine potential within.'
+  },
+  9: {
+    title: 'VOLUME 9 — WORKS OF SWAMI VIVEKANANDA',
+    badge: 'Mature Wisdom · Gita & Higher Truth',
+    paragraphs: [
+      'Volume 9 gathers later lectures, letters, conversations, writings, poems, and teachings from Swami Vivekananda.',
+      'It covers Jnana, Bhakti, meditation, the Gita, religion, Hinduism, and the spiritual messages of great teachers.',
+      'The volume also gives glimpses of Swamiji’s personality, travels, practical wisdom, and way of guiding people.'
+    ],
+    overall: 'Overall, it feels like a powerful collection of his mature wisdom: be strong, fearless, spiritual, thoughtful, and useful to others.'
+  },
+  'overall': {
+    title: 'OVERALL MESSAGE OF ALL 9 VOLUMES',
+    badge: 'Infinite Potential · Freedom & Divine Nature',
+    paragraphs: [
+      'Across all nine volumes, Swami Vivekananda teaches that every human being carries infinite potential and an underlying divine nature.',
+      'He encourages us to build strength of body, mind, and character; overcome fear; control the mind; and seek truth through direct experience.',
+      'He teaches that different religions can lead toward the same ultimate truth and that spirituality should express itself through love and service.'
+    ],
+    overall: 'His overall call is: become fearless, realize your inner divinity, help others, and dedicate your life to something higher than yourself.'
+  }
+};
+
+function renderVolSummary(key){
+  const data = VOLUME_SUMMARIES[key];
+  if(!data) return;
+  const isOverall = key === 'overall';
+  const html = `
+    <div class="vol-summary-card ${isOverall ? 'overall' : ''}">
+      <div class="vol-header">
+        <span class="vol-tag">${isOverall ? 'GRAND SUMMARY · ALL 9 VOLUMES' : '9-VOLUME COLLECTION SUMMARY'}</span>
+        <h3 class="vol-title">${esc(data.title)}</h3>
+        <div class="vol-badge">${esc(data.badge)}</div>
+      </div>
+      <div class="vol-body">
+        ${data.paragraphs.map(p=>`<p class="vol-para">${esc(p)}</p>`).join('')}
+      </div>
+      <div class="vol-overall-box ${isOverall ? 'gold-glow' : ''}">
+        <span class="box-tag">${isOverall ? 'THE UNIVERSAL CALL' : 'CORE LESSON & OVERALL TEACHING'}</span>
+        <p class="vol-overall-text">${esc(data.overall)}</p>
+      </div>
+    </div>
+  `;
+  $('#vpanel').innerHTML = html;
+}
+
+const shelf = $('#shelf');
+if(shelf){
+  shelf.innerHTML = '';
+  for(let i=1;i<=9;i++){
+    const b=el('button','spine','Vol. '+i);
+    b.setAttribute('aria-pressed', i===1?'true':'false');
+    b.onclick=()=>{
+      document.querySelectorAll('.spine').forEach(c=>c.setAttribute('aria-pressed','false'));
+      b.setAttribute('aria-pressed','true');
+      renderVolSummary(i);
+    };
+    shelf.appendChild(b);
+  }
+  const bAll=el('button','spine','All 9 Vols');
+  bAll.setAttribute('aria-pressed','false');
+  bAll.style.background = 'linear-gradient(180deg, #7A3305 0%, #4A1E02 100%)';
+  bAll.style.borderColor = '#F5A623';
+  bAll.onclick=()=>{
+    document.querySelectorAll('.spine').forEach(c=>c.setAttribute('aria-pressed','false'));
+    bAll.setAttribute('aria-pressed','true');
+    renderVolSummary('overall');
+  };
+  shelf.appendChild(bAll);
+  renderVolSummary(1);
+}
+/* Journal flowers keep the established session summary and full conversation close at hand. */
+const mem=[];function loadJ(openId=null){let entries=mem;try{const parsed=JSON.parse(localStorage.getItem('darpan')||localStorage.getItem('viveka')||'[]');if(Array.isArray(parsed))entries=parsed}catch(_){}
+ const host=$('#entries');if(!host)return;if(!entries.length){host.innerHTML='<p class="small">Your first finished conversation will plant a flower here.</p>';return}
+ host.innerHTML=entries.map((e,index)=>{const source=e.source||null,record=e.record||{},conversation=record.conversation||[],messages=conversation.map(m=>`<li><b>${m.role==='user'?'You':'Darpan'}:</b> ${esc(m.content||'')}</li>`).join('');const sourceMeta=source?[source.title,source.volume?`Volume ${source.volume}`:'',source.chapter||source.section||'',source.page?`PDF page ${source.page}`:''].filter(Boolean).map(esc).join(' · '):'This reflection stayed in Darpan’s own voice; no source citation is attached.';const sourceText=source?.text?`<p>${esc(source.text)}</p>`:'';return `<article class="flower-entry" id="flower-${esc(e.id||index)}"><button class="lotus-scene" type="button" aria-label="Open this reflection flower"><img class="flower-thumb" src="/static/lotus-3d.png" alt=""></button><details class="flower-copy" ${openId===e.id?'open':''}><summary><time>${esc(new Date(e.date||Date.now()).toLocaleDateString('en-IN',{month:'short',day:'2-digit',year:'numeric'}).toUpperCase())}</time><h3>${esc(e.topic||'A student reflection')}</h3><p>Idea to carry: ${esc(e.teaching||e.studentReflection||'A thought from your conversation.')}</p></summary><div class="flower-record"><div class="record-part"><b>YOUR REFLECTION</b><p>${esc(e.studentReflection||'Not recorded')}</p></div>${e.control?`<div class="record-part"><b>WHAT YOU CAN CONTROL</b><p>${esc(e.control)}</p></div>`:''}${e.next?`<div class="record-part"><b>YOUR NEXT STEP</b><p>${esc(e.next)}</p></div>`:''}<div class="record-part"><b>BOOK PASSAGE USED</b><p>${sourceMeta}</p>${sourceText}</div>${e.interpretation?`<div class="record-part"><b>AI INTERPRETATION</b><p>${esc(e.interpretation)}</p></div>`:''}<details><summary>Revisit the conversation (${conversation.length} messages)</summary><ol>${messages||'<li>No conversation messages were saved.</li>'}</ol></details></div></details></article>`}).join('');host.querySelectorAll('.lotus-scene').forEach(button=>{const flower=button.querySelector('.flower-thumb');button.addEventListener('pointermove',event=>{const rect=button.getBoundingClientRect();flower.style.setProperty('--rx',`${((event.clientY-rect.top)/rect.height-.5)*-18}deg`);flower.style.setProperty('--ry',`${((event.clientX-rect.left)/rect.width-.5)*18}deg`)});button.addEventListener('pointerleave',()=>{flower.style.removeProperty('--rx');flower.style.removeProperty('--ry')});button.onclick=()=>{const panel=button.parentElement.querySelector('.flower-copy');panel.open=!panel.open}});if(openId){const details=host.querySelector(`#flower-${CSS.escape(openId)} .flower-copy`);if(details)details.open=true}}
+loadJ();
+addEventListener('scroll',()=>{const k=Math.min(scrollY/innerHeight,1);const c=$('.hero-copy');if(c){c.style.opacity=1-k*1.1;c.style.transform=`translateY(${-k*60}px)`;}const p=$('#portrait');if(p)p.style.transform=`translateY(${scrollY*.12}px) scale(${1+k*.08})`},{passive:true});
+
+/* ---- Mind universe: cinematic orbit animation (always-on + hover intelligence) ---- */
+(()=>{
+const cv=document.querySelector('#uni'), HR=document.querySelector('#inner-universe'), tip=document.querySelector('#nq'), wt=document.querySelector('#wowt');
+if(!cv||!HR) return;
+const ctx=cv.getContext('2d');
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const mobile=()=>innerWidth<820;
+let W=0,H=0,dpr=1,mx=-999,my=-999,t=0,last=0,hov=null,foc=null,mode='idle',busy=0,highlight=[],tipKey='';
+let rx=[0,0,0],stars=[],motes=[],earthDots=[];
+const D=[
+ ['Fear','s',0,'What is fear asking you to avoid?'],
+ ['Failure','s',1,'Is this event a verdict, or information?'],
+ ['Doubt','s',2,'Whose voice is this doubt?'],
+ ['Comparison','s',1,'Whose path are you measuring yourself against?'],
+ ['Pressure','s',2,'Which expectations are actually yours?'],
+ ['Expectation','s',0,'Who wrote the standard you feel you are failing?'],
+ ['Confusion','s',1,'What is the one thing you can name clearly?'],
+ ['Loneliness','s',2,'Who could you let a little closer?'],
+ ['Courage','g',2,'What is one small act of courage today?'],
+ ['Purpose','g',1,'What would you work on if no one were watching?'],
+ ['Discipline','g',0,'What can you repeat tomorrow?'],
+ ['Self-belief','g',2,'What would change if you trusted your capacity to grow?']
+];
+const N=D.map((d,i)=>({name:d[0],cat:d[1],orbit:d[2],q:d[3],a:(i*1.47+d[2]*.8)%6.283,phase:i*1.91,rr:1,alpha:1,x:0,y:0,speed:.34+(i%4)*.06,seed:i*.71}));
+window.darpanNodes=window.vivekaNodes=N;
+window.darpanHighlight=window.vivekaHighlight=a=>{highlight=(a||[]).map(x=>String(x).toLowerCase());};
+function clamp(v,a,b){return Math.min(b,Math.max(a,v))}
+function resize(){
+ dpr=Math.min(devicePixelRatio||1,2); W=HR.clientWidth; H=HR.clientHeight;
+ cv.width=Math.max(1,Math.floor(W*dpr));cv.height=Math.max(1,Math.floor(H*dpr));cv.style.width=W+'px';cv.style.height=H+'px';ctx.setTransform(dpr,0,0,dpr,0,0);
+ const m=Math.min(W,H);rx=mobile()?[W*.33,W*.45,W*.57]:[m*.34,m*.49,m*.64];buildAtmosphere();
+}
+let sd=8417;const rnd=()=>{sd=(sd*1664525+1013904223)>>>0;return sd/4294967296};
+function buildAtmosphere(){
+ const sc=mobile()?90:210; stars=Array.from({length:sc},()=>({x:rnd(),y:rnd(),r:.35+rnd()*1.15,a:.12+rnd()*.36,p:rnd()*6.283}));
+ const mc=mobile()?22:46; motes=Array.from({length:mc},()=>({a:rnd()*6.283,r:.86+rnd()*.2,s:.08+rnd()*.2,z:rnd()*2-1,p:rnd()*6.283}));
+ const ec=mobile()?180:440; earthDots=Array.from({length:ec},()=>{const u=rnd()*2-1,th=rnd()*6.283;return{la:Math.asin(u),lo:th,city:rnd()>.82,p:rnd()*6.283};});
+}
+resize();addEventListener('resize',resize);
+const pointer=e=>{const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top};
+HR.addEventListener('pointermove',pointer);HR.addEventListener('pointerdown',pointer);
+HR.addEventListener('pointerleave',()=>{if(!foc&&innerWidth>820){mx=my=-999;hov=null;hideTip()}});
+HR.addEventListener('click',()=>{if(hov){foc=hov;mode='focus';window.vivekaHighlight([hov.name]);showTip(foc,true);}});
+function center(){return{x:W*.5,y:H*(mobile()?.49:.50)}}
+function nodePosition(n,a,scale=1){const c=center(),m=Math.min(W,H),ys=mobile()?.60:.72,w=n.cat==='s'?Math.sin(t*1.5+n.phase)*10:Math.sin(t*.7+n.phase)*4,r=rx[n.orbit]*scale;return[c.x+Math.cos(a)*r,c.y+Math.sin(a)*r*ys+w]}
+function drawBackground(){
+ const c=center(),m=Math.min(W,H);ctx.clearRect(0,0,W,H);
+ let g=ctx.createRadialGradient(c.x,c.y,0,c.x,c.y,m*.78);g.addColorStop(0,'rgba(247,186,103,.28)');g.addColorStop(.38,'rgba(217,119,32,.10)');g.addColorStop(1,'rgba(217,119,32,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ stars.forEach(s=>{const tw=.62+.38*Math.sin(t*.9+s.p);ctx.fillStyle='rgba(248,216,157,'+(s.a*tw)+')';ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,6.283);ctx.fill()});
+}
+function drawEarth(){
+ const c=center(),m=Math.min(W,H),r=m*(mobile()?.185:.22),ex=c.x-m*.14,ey=c.y-m*.02;let g=ctx.createRadialGradient(ex-r*.35,ey-r*.4,r*.05,ex,ey,r);
+ g.addColorStop(0,'#654529');g.addColorStop(.56,'#2d1d13');g.addColorStop(1,'#0a0705');ctx.save();ctx.fillStyle=g;ctx.shadowColor='rgba(231,158,75,.46)';ctx.shadowBlur=r*.32;ctx.beginPath();ctx.arc(ex,ey,r,0,6.283);ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle='rgba(211,169,98,.36)';ctx.lineWidth=1;ctx.beginPath();ctx.arc(ex,ey,r,0,6.283);ctx.stroke();
+ const spin=t*.14;earthDots.forEach(d=>{const lon=d.lo+spin,z=Math.cos(d.la)*Math.cos(lon);if(z<=0)return;const x=ex+r*Math.cos(d.la)*Math.sin(lon),y=ey-r*Math.sin(d.la);ctx.fillStyle=d.city?'rgba(246,193,102,'+(.28+.66*z)+')':'rgba(196,150,77,'+(.16+.38*z)+')';ctx.fillRect(x,y,d.city?1.6:1,d.city?1.6:1)});
+ for(let k=0;k<5;k++){ctx.strokeStyle='rgba(209,171,106,'+(.10+k*.028)+')';ctx.beginPath();ctx.ellipse(ex,ey,r*(.22+k*.17),r,0,0,6.283);ctx.stroke()}ctx.strokeStyle='rgba(230,187,104,.2)';ctx.beginPath();ctx.ellipse(ex,ey,r*1.47,r*.37,-.32,0,6.283);ctx.stroke();ctx.restore();
+}
+function drawOrbits(){const c=center();rx.forEach((r,i)=>{ctx.save();ctx.beginPath();ctx.ellipse(c.x,c.y,r,r*(mobile()?.58:.72),0,0,6.283);const pulse=.55+.28*Math.sin(t*(.65+i*.2)+i);ctx.strokeStyle='rgba(199,154,73,'+(i===1?.3:pulse*.2)+')';ctx.lineWidth=i===1?1.15:.8;ctx.stroke();for(let j=0;j<4;j++){const a=t*(.16+i*.06)*(j%2?-1:1)+j*1.57+i*.35,x=c.x+Math.cos(a)*r,y=c.y+Math.sin(a)*r*(mobile()?.58:.72),rad=2.5+(j===1?1.5:0),gg=ctx.createRadialGradient(x,y,0,x,y,rad*5);gg.addColorStop(0,'rgba(247,190,106,.95)');gg.addColorStop(1,'rgba(247,190,106,0)');ctx.fillStyle=gg;ctx.beginPath();ctx.arc(x,y,rad*5,0,6.283);ctx.fill()}ctx.restore()})}
+function drawEnergy(){const c=center();for(let k=0;k<4;k++){const r=88+k*38,a=t*(.38-k*.055)*(k%2?-1:1)+k*1.4,sx=c.x+Math.cos(a)*r,sy=c.y+Math.sin(a)*r*.72;ctx.save();ctx.strokeStyle='rgba(244,177,95,'+(.13-k*.02)+')';ctx.lineWidth=1;ctx.beginPath();ctx.arc(c.x,c.y,r,0,6.283);ctx.stroke();const glow=ctx.createRadialGradient(sx,sy,0,sx,sy,20);glow.addColorStop(0,'rgba(255,204,119,.95)');glow.addColorStop(1,'rgba(255,204,119,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(sx,sy,20,0,6.283);ctx.fill();ctx.restore()}}
+function drawMind(){const c=center(),m=Math.min(W,H),breath=1+.018*Math.sin(t*1.1),aura=m*(mobile()?.19:.17)*breath,g=ctx.createRadialGradient(c.x,c.y,0,c.x,c.y,aura*1.4);g.addColorStop(0,'rgba(255,241,211,.34)');g.addColorStop(.3,'rgba(243,164,85,.18)');g.addColorStop(.62,'rgba(217,119,32,.06)');g.addColorStop(1,'rgba(217,119,32,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(c.x,c.y,aura*1.4,0,6.283);ctx.fill();}
+function drawMotes(){const c=center();motes.forEach((d,i)=>{d.a+=(reduced?0:d.s*.95)*.016;const r=rx[2]*d.r,x=c.x+Math.cos(d.a)*r,y=c.y+Math.sin(d.a)*r*(mobile()?.58:.72)+d.z*15,a=.16+.15*(.5+.5*Math.sin(t*1.7+d.p));ctx.fillStyle='rgba(245,191,105,'+a+')';ctx.beginPath();ctx.arc(x,y,1+(i%5===0?1.2:0),0,6.283);ctx.fill()})}
+function showTip(n,focus=false){tip.classList.add('show');tip.style.opacity='1';tip.innerHTML='<b>'+n.name.toUpperCase()+'</b><span class="qtext">'+n.q+'</span><span class="hint">'+(focus?'Focused thought · click elsewhere to release':'Hovering slows this thought · click to focus')+'</span>';positionTip(n)}
+function hideTip(){tip.classList.remove('show');tip.style.opacity='0';tipKey=''}
+function positionTip(n){tip.style.left=clamp(n.x,170,W-170)+'px';tip.style.top=clamp(n.y+24,86,H-175)+'px'}
+function drawNodes(){
+ const c=center(),list=mobile()?N.filter((n,i)=>i%2===0):N;let best=null,bd=mobile()?86:78;
+ list.forEach(n=>{
+   const isHot=highlight.includes(n.name.toLowerCase()),isFocus=n===foc;
+   const focusFactor=mode==='focus'?(isFocus?1:.22):1;
+   const slow=hov===n?.18:1;
+   const speed=n.speed*(n.cat==='s'?.94:1.08)*(mode==='conv'?4:mode==='focus'?.55:1)*slow*(reduced?0:1);
+   if(!reduced)n.a+=speed*.016;
+   const [x,y]=nodePosition(n,n.a,mode==='conv'?.44:1);n.x=x;n.y=y;
+   n.alpha += ((focusFactor*(isHot?1:.96))-n.alpha)*.06;
+   const big=hov===n||isFocus,pulse=.96+.10*Math.sin(t*2.1+n.phase),size=(big?21:isHot?18.5:15.5)*pulse;
+   for(let k=4;k>=1;k--){const [tx,ty]=nodePosition(n,n.a-k*.075,1);ctx.fillStyle=n.cat==='s'?'rgba(138,59,30,'+(.09*n.alpha*(1-k/5))+')':'rgba(202,159,87,'+(.12*n.alpha*(1-k/5))+')';ctx.beginPath();ctx.arc(tx,ty,3-k*.42,0,6.283);ctx.fill()}
+   if(big||isHot){ctx.strokeStyle=n.cat==='s'?'rgba(138,59,30,'+(.42*n.alpha)+')':'rgba(231,183,94,'+(.62*n.alpha)+')';ctx.lineWidth=big?1.35:1;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(c.x,c.y);ctx.stroke()}
+   if(big){ctx.save();ctx.shadowColor=n.cat==='s'?'rgba(138,59,30,.65)':'rgba(244,182,98,.75)';ctx.shadowBlur=18;ctx.fillStyle=n.cat==='s'?'rgba(138,59,30,.94)':'rgba(229,181,96,.98)';ctx.beginPath();ctx.arc(x,y,3.5,0,6.283);ctx.fill();ctx.restore()}
+   ctx.font=(big?'600 ':'600 ')+size+'px Cormorant Garamond, Georgia, serif';ctx.textAlign='center';ctx.textBaseline='middle';
+   const labelAlpha=Math.max(.86,n.alpha);
+   const labelColor=n.cat==='s'?`rgba(240,150,91,${labelAlpha})`:`rgba(244,198,106,${labelAlpha})`;
+   ctx.save();ctx.shadowColor='rgba(21,12,8,.78)';ctx.shadowBlur=8;ctx.shadowOffsetY=1;ctx.fillStyle=labelColor;ctx.fillText(n.name.toUpperCase(),x,y);ctx.restore();
+   ctx.save();ctx.fillStyle=n.cat==='s'?`rgba(240,150,91,${Math.max(.8,n.alpha*.92)})`:`rgba(244,198,106,${Math.max(.84,n.alpha)})`;ctx.shadowColor='rgba(21,12,8,.65)';ctx.shadowBlur=5;ctx.beginPath();ctx.arc(x,y+13,2.4,0,6.283);ctx.fill();ctx.restore();
+   if(mode==='idle'&&!isFocus&&n.alpha>.45){const dd=Math.hypot(mx-x,my-y);if(dd<bd){bd=dd;best=n}}
+ });
+ hov=mode==='idle'?best:(foc||hov);
+ const active=foc||hov;
+ if(active){if(active.name!==tipKey||!tip.classList.contains('show')){tipKey=active.name;showTip(active,!!foc)}else positionTip(active)} else hideTip();
+}
+function frame(ts){requestAnimationFrame(frame);if(document.hidden){last=ts;return;}const dt=last?Math.min((ts-last)/1000,.05):.016;last=ts;if(!reduced)t+=dt;else t=1;drawBackground();drawEarth();drawOrbits();drawEnergy();drawMotes();drawMind();drawNodes();}
+requestAnimationFrame(frame);
+function showWow(a,b,ms){wt.innerHTML=String(a)+'<b>'+String(b)+'</b>';wt.classList.add('on');const p=center();wt.style.left=p.x+'px';wt.style.top=(p.y+Math.min(W,H)*.31)+'px';setTimeout(()=>wt.classList.remove('on'),ms||1400)}
+const ub=document.querySelector('#universeBegin');
+if(ub)ub.onclick=()=>{if(busy)return;busy=1;mode='conv';hideTip();setTimeout(()=>{foc=N.find(n=>highlight.includes(n.name.toLowerCase()))||N.find(n=>n.name==='Courage')||N[0];mode='focus';showTip(foc,true);showWow("Let's begin with this.",foc.name,1800)},1300);setTimeout(()=>document.querySelector('#reflect')?.scrollIntoView({behavior:'smooth'}),3300);setTimeout(()=>{mode='idle';foc=null;busy=0},5400)};
+})();
+</script>
+
+</body>
+</html>

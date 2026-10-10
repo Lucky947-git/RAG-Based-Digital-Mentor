@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My Sanctuary Pond · Darpan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #F5A623;
+  --gold-glow: rgba(245, 166, 35, 0.45);
+  --dark: #0E0704;
+  --cream: #FFF8EE;
+  --teal-deep: #0B2421;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  margin: 0;
+  background: #080D0B;
+  color: #FFF;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ==========================================================
+   PHOTOREALISTIC ZEN POND SANCTUARY BACKGROUND
+   ========================================================== */
+.pond {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: 
+    radial-gradient(ellipse 90% 60% at 50% 10%, rgba(255, 215, 120, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 80% at 50% 90%, rgba(10, 36, 32, 0.85) 0%, transparent 70%),
+    url('/static/zen-pond-bg.jpg') no-repeat center center / cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ambient morning mist overlay */
+.pond-mist {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(ellipse at 30% 70%, rgba(255, 245, 220, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 60%, rgba(215, 245, 230, 0.09) 0%, transparent 55%);
+  animation: mistPulse 14s ease-in-out infinite alternate;
+  z-index: 1;
+}
+@keyframes mistPulse {
+  0% { opacity: 0.65; transform: scale(1) translateY(0); }
+  100% { opacity: 0.95; transform: scale(1.04) translateY(-15px); }
+}
+
+/* Subtle water caustic ripple canvas */
+#waterCanvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.45;
+  mix-blend-mode: screen;
+}
+
+/* ==========================================================
+   SANCTUARY TOP NAVIGATION & STATUS
+   ========================================================== */
+.top-nav {
+  position: relative;
+  z-index: 20;
+  padding: 24px clamp(20px, 4vw, 48px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.pill-btn {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 99px;
+  background: rgba(18, 12, 8, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 11px 22px;
+  color: #FFF3E0;
+  text-decoration: none;
+  font: 700 12px var(--outfit, 'Outfit', sans-serif);
+  letter-spacing: 0.14em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.pill-btn:hover {
+  background: rgba(229, 138, 54, 0.85);
+  border-color: #F5A623;
+  color: #FFF;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(211, 84, 0, 0.45);
+}
+
+.heading-island {
+  position: relative;
+  z-index: 10;
+  margin: 10px auto 30px;
+  text-align: center;
+  padding: 20px 36px 18px;
+  border: 1px solid rgba(255, 230, 180, 0.3);
+  border-radius: 24px;
+  background: rgba(15, 25, 22, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  max-width: 460px;
+}
+.heading-island h1 {
+  margin: 0;
+  font: 600 clamp(26px, 3.2vw, 36px)/1.15 'Cormorant Garamond', Georgia, serif;
+  color: #FFF8EE;
+  letter-spacing: 0.02em;
+}
+.heading-island em {
+  font-style: italic;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 16px;
+  color: #F5C278;
+  display: block;
+  margin-top: 4px;
+}
+.heading-island small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px auto 0;
+  padding: 5px 16px;
+  border: 1px solid rgba(245, 166, 35, 0.4);
+  border-radius: 99px;
+  background: rgba(245, 166, 35, 0.12);
+  color: #FFE6A8;
+  font: 700 11px 'Outfit', sans-serif;
+  letter-spacing: 0.12em;
+}
+
+/* ==========================================================
+   POND WATER SURFACE & 3D BLOOMING LOTUS GRID
+   ========================================================== */
+.pond-stage {
+  position: relative;
+  z-index: 10;
+  flex-grow: 1;
+  padding: 20px clamp(16px, 4vw, 64px) 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flowers-grid {
+  width: 100%;
+  max-width: 1260px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 50px 30px;
+  perspective: 1200px;
+  align-items: center;
+  justify-items: center;
+}
+
+/* ==========================================================
+   INDIVIDUAL 3D BLOOMING LOTUS COMPONENT
+   ========================================================== */
+.lotus-vessel {
+  position: relative;
+  width: min(28vw, 240px);
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  perspective: 1000px;
+  animation: vesselRise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 120ms);
+}
+@keyframes vesselRise {
+  from { opacity: 0; transform: translateY(40px) scale(0.85); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Natural staggered offset for organic pond look */
+.lotus-vessel:nth-child(3n+1) { translate: 0 4%; }
+.lotus-vessel:nth-child(3n+2) { translate: 0 -8%; }
+.lotus-vessel:nth-child(3n)   { translate: 0 12%; }
+
+/* The Lily Pad Base */
+.lily-pad {
+  position: absolute;
+  bottom: 6%;
+  width: 90%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 40%, #1A5438 0%, #123C28 65%, #0B2418 100%);
+  border: 1px solid rgba(80, 200, 130, 0.25);
+  box-shadow: 
+    0 16px 30px rgba(0, 0, 0, 0.75),
+    inset 0 2px 4px rgba(120, 240, 160, 0.3);
+  transform: rotateX(68deg);
+  transition: transform 0.4s ease, filter 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Expanding Concentric Water Waves */
+.water-ripples {
+  position: absolute;
+  bottom: 4%;
+  width: 100%;
+  height: 32%;
+  border-radius: 50%;
+  transform: rotateX(68deg);
+  pointer-events: none;
+  z-index: 0;
+}
+.ripple-ring {
+  position: absolute;
+  inset: -15%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(220, 245, 235, 0.35);
+  box-shadow: inset 0 0 12px rgba(160, 230, 210, 0.2);
+  opacity: 0;
+  animation: pondPulse 4s cubic-bezier(0.1, 0.8, 0.4, 1) infinite;
+  animation-delay: calc(var(--i, 0) * 350ms);
+}
+.ripple-ring:nth-child(2) { animation-delay: calc(var(--i, 0) * 350ms + 1.2s); }
+.ripple-ring:nth-child(3) { animation-delay: calc(var(--i, 0) * 350ms + 2.4s); }
+@keyframes pondPulse {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  60% { opacity: 0.3; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* 3D Blooming Flower Object */
+.lotus-flower-3d {
+  position: relative;
+  z-index: 5;
+  width: 95%;
+  height: 95%;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.2, 1.25, 0.4, 1), filter 0.4s ease;
+  animation: flowerIdleFloat 4.6s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * -400ms);
+}
+@keyframes flowerIdleFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-9px) rotate(1.2deg); }
+}
+
+/* Flower Image Layer */
+.lotus-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.75));
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.45s ease;
+  transform-origin: center center;
+}
+
+/* Center Radiant Golden Stamen Glow (Blooms on hover) */
+.stamen-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 45%;
+  height: 45%;
+  transform: translate(-50%, -50%) scale(0.5);
+  border-radius: 50%;
+  background: radial-gradient(circle, #FFF4A3 0%, rgba(245, 166, 35, 0.9) 45%, rgba(211, 84, 0, 0.5) 70%, transparent 85%);
+  filter: blur(14px);
+  opacity: 0.3;
+  pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.45s ease;
+  z-index: 4;
+}
+
+/* Floating Wisdom Sparkles / Pollen particles */
+.pollen-cloud {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.pollen-cloud i {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #FFF099;
+  box-shadow: 0 0 10px #F5A623;
+  animation: sparkRise 2s ease-out infinite;
+}
+.pollen-cloud i:nth-child(1) { top: 40%; left: 30%; animation-delay: 0s; }
+.pollen-cloud i:nth-child(2) { top: 35%; right: 28%; animation-delay: 0.4s; }
+.pollen-cloud i:nth-child(3) { top: 55%; left: 50%; animation-delay: 0.8s; }
+.pollen-cloud i:nth-child(4) { top: 60%; right: 35%; animation-delay: 1.2s; }
+@keyframes sparkRise {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-40px) scale(1.4); opacity: 0; }
+}
+
+/* Floating Card / Tooltip above the blooming lotus */
+.bloom-tooltip {
+  position: absolute;
+  bottom: 104%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px) scale(0.85);
+  background: rgba(14, 22, 18, 0.88);
+  border: 1px solid rgba(245, 166, 35, 0.5);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 166, 35, 0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 8px 16px;
+  border-radius: 99px;
+  white-space: nowrap;
+  font: 700 11px 'Outfit', sans-serif;
+  letter-spacing: 0.1em;
+  color: #FFF3D6;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+.bloom-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(14, 22, 18, 0.88) transparent transparent transparent;
+}
+
+/* ==========================================================
+   THE 3D REALISTIC BLOOM HOVER STATE (3D / 30D / 80D EFFECT)
+   ========================================================== */
+.lotus-vessel:hover .lotus-flower-3d {
+  animation: none;
+  transform: 
+    perspective(900px) 
+    rotateX(calc(var(--tilt-y, 0) * 22deg)) 
+    rotateY(calc(var(--tilt-x, 0) * 22deg)) 
+    scale3d(1.36, 1.36, 1.36) 
+    translateZ(45px);
+  filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 28px rgba(245, 166, 35, 0.5));
+}
+.lotus-vessel:hover .lotus-img {
+  transform: scale(1.08) rotate(1deg);
+  filter: brightness(1.12) contrast(1.06);
+}
+.lotus-vessel:hover .stamen-aura {
+  transform: translate(-50%, -50%) scale(1.55);
+  opacity: 0.85;
+}
+.lotus-vessel:hover .lily-pad {
+  transform: rotateX(68deg) scale(1.12);
+  filter: brightness(1.25);
+}
+.lotus-vessel:hover .water-ripples .ripple-ring {
+  animation-duration: 1.8s;
+  border-color: rgba(245, 210, 140, 0.6);
+}
+.lotus-vessel:hover .pollen-cloud {
+  opacity: 1;
+}
+.lotus-vessel:hover .bloom-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+/* Empty State / Seed guide */
+.empty-guide {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 24px;
+  max-width: 540px;
+  background: rgba(18, 28, 24, 0.75);
+  border: 1px dashed rgba(245, 166, 35, 0.4);
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+}
+.empty-guide h3 {
+  font: 600 24px 'Cormorant Garamond', Georgia, serif;
+  color: #FFF2D1;
+  margin-bottom: 10px;
+}
+.empty-guide p {
+  font: 400 14px/1.6 'Plus Jakarta Sans', sans-serif;
+  color: #B8C7BF;
+  margin-bottom: 20px;
+}
+
+/* Bottom Hint */
+.bottom-hint {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  padding: 10px 22px;
+  border-radius: 99px;
+  background: rgba(14, 20, 17, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font: 600 11px 'Outfit', sans-serif;
+  letter-spacing: 0.12em;
+  color: #DDEBE3;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ==========================================================
+   REFLECTION READING DIALOG MODAL
+   ========================================================== */
+.modal {
+  position: fixed;
+  z-index: 99;
+  inset: 0;
+  display: none;
+  place-items: center;
+  padding: 20px;
+  background: rgba(8, 5, 3, 0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 0;
+}
+.modal.open {
+  display: grid;
+  animation: modalFade 0.3s ease;
+}
+@keyframes modalFade {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+.card {
+  position: relative;
+  width: min(640px, 100%);
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 40px clamp(20px, 4vw, 40px);
+  border: 1.5px solid rgba(212, 175, 55, 0.35);
+  border-radius: 24px;
+  background: linear-gradient(180deg, #1C120B 0%, #120A05 100%);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8), 0 0 50px rgba(229, 138, 54, 0.15);
+  color: #FFF;
+}
+.close {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #E5CDBA;
+  font-size: 24px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.close:hover {
+  background: #D35400;
+  color: #FFF;
+  border-color: #F5A623;
+}
+.card .date {
+  font: 800 10.5px 'Outfit', sans-serif;
+  letter-spacing: 0.22em;
+  color: #E5A93B;
+  text-transform: uppercase;
+}
+.card h2 {
+  margin: 12px 0 24px;
+  font: 600 clamp(28px, 4vw, 36px)/1.2 'Cormorant Garamond', Georgia, serif;
+  color: #FFF8EE;
+}
+.part {
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.part b {
+  display: block;
+  font: 800 9.5px 'Outfit', sans-serif;
+  letter-spacing: 0.2em;
+  color: #F5A623;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.part p {
+  margin: 0;
+  font: 400 14.5px/1.7 'Plus Jakarta Sans', sans-serif;
+  color: #D3C4B4;
+  white-space: pre-wrap;
+}
+.part blockquote {
+  margin: 0;
+  font: italic 16px/1.65 'Cormorant Garamond', Georgia, serif;
+  color: #FFE6A8;
+}
+.part details summary {
+  cursor: pointer;
+  color: #E5A93B;
+  font: 600 13px 'Outfit', sans-serif;
+}
+.part ol {
+  padding-left: 20px;
+  color: #CFC2B4;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+.part li { margin: 8px 0; }
+
+.pond-empty-state {
+  grid-column: 1 / -1;
+  margin: 40px auto;
+  text-align: center;
+  padding: 40px 28px;
+  background: rgba(15, 25, 22, 0.65);
+  border: 1px solid rgba(245, 166, 35, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  max-width: 480px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+.empty-lotus-icon { font-size: 48px; margin-bottom: 12px; filter: drop-shadow(0 0 15px rgba(245, 166, 35, 0.4)); }
+.pond-empty-state h3 { font: 600 24px 'Cormorant Garamond', Georgia, serif; color: #FFF8EE; margin-bottom: 8px; }
+.pond-empty-state p { font-size: 14px; color: #D7C7B5; line-height: 1.6; }
+
+@media (max-width: 700px) {
+  .heading-island { margin-top: 0; padding: 16px 20px; }
+  .heading-island h1 { font-size: 24px; }
+  .lotus-vessel { width: min(42vw, 170px); }
+  .flowers-grid { gap: 30px 16px; }
+  .bottom-hint { font-size: 9.5px; padding: 8px 16px; }
+}
+</style>
+</head>
+<body>
+
+<main class="pond">
+  <div class="pond-mist" aria-hidden="true"></div>
+  <canvas id="waterCanvas" aria-hidden="true"></canvas>
+
+  <!-- Top Controls -->
+  <header class="top-nav">
+    <a class="pill-btn" href="/">← Sanctuary Home</a>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <a class="pill-btn" href="/#reflect">＋ New Reflection</a>
+    </div>
+  </header>
+
+  <!-- Title Island -->
+  <header class="heading-island">
+    <h1>Sanctuary Lotus Pond</h1>
+    <em>Grove of Inner Strength · Darpan</em>
+    <small id="count">✧ 0 reflections bloomed</small>
+  </header>
+
+  <!-- 3D Lotus Grid Section -->
+  <section class="pond-stage">
+    <div class="flowers-grid" id="flowers" aria-label="Bloomed reflection lotuses"></div>
+  </section>
+
+  <!-- Helpful Hint -->
+  <div class="bottom-hint">Hover cursor over any lotus to watch it bloom in 3D · Click to read reflection</div>
+</main>
+
+<!-- Reflection Modal -->
+<dialog class="modal" id="modal">
+  <article class="card">
+    <button class="close" id="close" aria-label="Close dialog">×</button>
+    <div class="date" id="date"></div>
+    <h2 id="title"></h2>
+    <div class="part">
+      <b>YOUR REFLECTION</b>
+      <p id="reflection"></p>
+    </div>
+    <div class="part" id="controlPart">
+      <b>WHAT YOU CAN CONTROL</b>
+      <p id="control"></p>
+    </div>
+    <div class="part" id="nextPart">
+      <b>YOUR NEXT STEP</b>
+      <p id="next"></p>
+    </div>
+    <div class="part" id="teachingPart">
+      <b>THOUGHT YOU CARRIED · SOURCE CITATION</b>
+      <p id="teaching"></p>
+      <blockquote id="source"></blockquote>
+    </div>
+    <div class="part">
+      <details>
+        <summary id="convoTitle">Revisit the conversation</summary>
+        <ol id="conversation"></ol>
+      </details>
+    </div>
+  </article>
+</dialog>
+
+<script>
+(()=>{
+  const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const host=document.querySelector('#flowers'), modal=document.querySelector('#modal');
+  let entries=[], selected=null, renderVersion=0;
+
+  function readEntries(){
+    try {
+      const parsed = JSON.parse(localStorage.getItem('darpan') || localStorage.getItem('viveka') || '[]');
+      if(Array.isArray(parsed) && parsed.length) {
+        return parsed.filter(item => item && typeof item === 'object');
+      }
+    } catch(error){
+      console.warn('Could not read saved Darpan reflections:', error);
+    }
+    return [];
+  }
+
+  function fromServer(record){
+    const passage=(record.relevant_teachings_and_sources||[])[0]||null;
+    const source=passage?{...passage,title:passage.book||passage.title}:null;
+    return {
+      id: record.session_id,
+      date: record.ended_at,
+      topic: record.main_topic || 'A student reflection',
+      studentReflection: record.student_reflection || null,
+      control: record.what_i_can_control || null,
+      next: record.practical_next_step || null,
+      teaching: record.reflection_teaching || null,
+      interpretation: record.reflection_interpretation || record.ai_interpretation || null,
+      source,
+      record
+    };
+  }
+
+  async function render(){
+    const version=++renderVersion;
+    let merged = readEntries();
+    try {
+      const response = await fetch('/api/sessions?limit=16', {cache: 'no-store'});
+      if(response.ok){
+        const data = await response.json();
+        const serverList = (data.sessions || []).map(fromServer);
+        if(serverList.length) {
+          const byId = new Map(merged.map(item => [item.id, item]));
+          serverList.forEach(item => byId.set(item.id, item));
+          merged = [...byId.values()].sort((a,b) => new Date(b.date||0) - new Date(a.date||0)).slice(0, 16);
+        }
+      }
+    } catch(error){
+      console.info('Using browser-saved reflections while the server session archive is offline.');
+    }
+    if(version !== renderVersion) return;
+    entries = merged;
+
+    const count = document.querySelector('#count');
+    count.textContent = `✧ ${entries.length} ${entries.length === 1 ? 'reflection' : 'reflections'} bloomed`;
+
+    host.replaceChildren();
+
+    if(!entries.length) {
+      const emptyBox = document.createElement('div');
+      emptyBox.className = 'pond-empty-state';
+      emptyBox.innerHTML = `
+        <div class="empty-lotus-icon">🪷</div>
+        <h3>Your Sanctuary Pond is Quiet & Serene</h3>
+        <p>No reflections bloomed yet in the database. Plant a reflection in your chat session to see your lotus blossom here.</p>
+        <a class="pill-btn" href="/#reflect" style="margin-top:16px; display:inline-flex;">＋ Plant Your First Reflection</a>
+      `;
+      host.append(emptyBox);
+      return;
+    }
+
+    entries.forEach((item, index) => {
+      const vessel = document.createElement('article');
+      vessel.className = 'lotus-vessel';
+      vessel.style.setProperty('--i', index);
+      vessel.setAttribute('role', 'button');
+      vessel.setAttribute('tabindex', '0');
+      vessel.setAttribute('aria-label', `Bloomed lotus: ${item.topic}`);
+
+      // Choose realistic lotus image
+      const lotusSrc = (index % 2 === 0) ? '/static/lotus-blooming-real.png' : '/static/lotus-3d.png';
+
+      vessel.innerHTML = `
+        <div class="bloom-tooltip">🪷 ${esc(item.topic || 'Reflection')} · Tap to read</div>
+        <div class="water-ripples">
+          <div class="ripple-ring"></div>
+          <div class="ripple-ring"></div>
+          <div class="ripple-ring"></div>
+        </div>
+        <div class="lily-pad"></div>
+        <div class="lotus-flower-3d">
+          <div class="stamen-aura"></div>
+          <div class="pollen-cloud">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <img class="lotus-img" src="${lotusSrc}" alt="3D Blooming Lotus" loading="lazy" />
+        </div>
+      `;
+
+      // 3D Realistic interactive cursor tracking tilt
+      vessel.addEventListener('mousemove', e => {
+        const rect = vessel.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        vessel.style.setProperty('--tilt-x', x.toFixed(3));
+        vessel.style.setProperty('--tilt-y', (-y).toFixed(3));
+      });
+      vessel.addEventListener('mouseleave', () => {
+        vessel.style.setProperty('--tilt-x', '0');
+        vessel.style.setProperty('--tilt-y', '0');
+      });
+
+      vessel.onclick = () => openReflection(item);
+      vessel.onkeydown = e => { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); openReflection(item); } };
+
+      host.append(vessel);
+    });
+  }
+
+  function openReflection(item){
+    selected = item;
+    document.querySelector('#date').textContent = new Date(item.date || Date.now()).toLocaleDateString('en-IN', {
+      month: 'long', day: '2-digit', year: 'numeric'
+    }).toUpperCase();
+    document.querySelector('#title').textContent = item.topic || 'A student reflection';
+    document.querySelector('#reflection').textContent = item.studentReflection || 'No personal reflection was recorded.';
+    
+    setPart('controlPart', 'control');
+    setPart('nextPart', 'next');
+    
+    document.querySelector('#teaching').textContent = item.teaching || 'No teaching was recorded for this session.';
+    const source = item.source;
+    document.querySelector('#source').textContent = source ? 
+      [source.title, source.volume && `Volume ${source.volume}`, source.chapter || source.section, source.page && `PDF page ${source.page}`].filter(Boolean).join(' · ')
+      : 'Documented archival teaching from Swami Vivekananda.';
+    
+    const conversation = item.record?.conversation || [];
+    document.querySelector('#convoTitle').textContent = `Revisit the conversation (${conversation.length} messages)`;
+    document.querySelector('#conversation').innerHTML = conversation.map(msg => 
+      `<li><b>${msg.role==='user'?'You':'Darpan'}:</b> ${esc(msg.content)}</li>`
+    ).join('');
+
+    modal.classList.add('open');
+    modal.setAttribute('open', '');
+  }
+
+  function setPart(partId, key){
+    const value = selected?.[key];
+    document.querySelector(`#${key}`).textContent = value || 'Not recorded';
+    document.querySelector(`#${partId}`).hidden = !value;
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.removeAttribute('open');
+  }
+
+  document.querySelector('#close').onclick = closeModal;
+  modal.addEventListener('click', event => { if(event.target === modal) closeModal(); });
+  addEventListener('keydown', event => { if(event.key === 'Escape') closeModal(); });
+
+  // Demo lotuses button
+  const demoBloomButton = document.querySelector('#demoBloomBtn');
+  if (demoBloomButton) {
+    demoBloomButton.onclick = () => {
+      localStorage.setItem('darpan', JSON.stringify(SEED_LOTUSES));
+      localStorage.setItem('viveka', JSON.stringify(SEED_LOTUSES));
+      render();
+    };
+  }
+
+  // Water Caustic Canvas
+  const canvas = document.querySelector('#waterCanvas');
+  const ctx = canvas.getContext('2d');
+  let cw, ch, time = 0;
+  function resizeCanvas(){
+    cw = canvas.width = window.innerWidth;
+    ch = canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function drawWaterRipples(){
+    ctx.clearRect(0, 0, cw, ch);
+    time += 0.015;
+    ctx.save();
+    ctx.fillStyle = 'rgba(245, 185, 95, 0.03)';
+    for(let i=0; i<6; i++){
+      const y = ch * 0.35 + i * (ch * 0.1);
+      const wave = Math.sin(time + i * 0.8) * 15;
+      ctx.beginPath();
+      ctx.ellipse(cw * 0.5 + wave, y, cw * 0.65, 30 + i * 8, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+    requestAnimationFrame(drawWaterRipples);
+  }
+  requestAnimationFrame(drawWaterRipples);
+
+  // Storage listener
+  addEventListener('storage', event => {
+    if(event.key === 'darpan' || event.key === 'viveka' || event.key === null) render();
+  });
+  addEventListener('pageshow', render);
+  render();
+})();
+</script>
+</body>
+</html>

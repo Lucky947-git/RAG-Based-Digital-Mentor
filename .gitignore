@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.py[cod]
+.venv/
+chroma/
+data/index/
+data/chroma/
+data/sessions/
+data/pdfs/
+sessions/
+node_modules/
+
+*.backup
+data/processed/
