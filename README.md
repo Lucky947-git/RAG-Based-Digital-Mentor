@@ -1,4 +1,4 @@
-# VIVEKA — A Digital Mentor for Students
+# DARPAN — A Digital Mentor for Students
 
 A warm, context-aware student mentor built with FastAPI, LangGraph, Groq (`groq` SDK), ChromaDB, BGE embeddings, PyMuPDF, and a responsive HTML/CSS/JavaScript frontend.
 
